@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treehouse · Design &amp; AI studio in Toronto</title>
+<meta name="description" content="Treehouse is a Toronto design and AI studio. We help nonprofits and AI-for-good teams set a design vision, scale how design works, and adopt AI workflows that fit their size and culture.">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Treehouse · Design & AI studio in Toronto">
+<meta property="og:description" content="We make your team work better with AI. Design vision, design operations and AI workflows for nonprofits and AI-for-good teams.">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:locale" content="en_CA">
+<meta name="theme-color" content="#beff50">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Crect width='38' height='38' rx='10' fill='%23beff50'/%3E%3Cpath d='M19 6 8 18h6l-4 6h18l-4-6h6L19 6Z M19 24v8' fill='none' stroke='%2314140f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Treehouse",
+  "description": "Design and AI studio. We help nonprofits and AI-for-good teams set a design vision, scale design operations, and adopt AI workflows. We don't build your product.",
+  "url": "https://example.com/",
+  "email": "hello@example.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+  "areaServed": "Toronto, Ontario, Canada",
+  "knowsAbout": ["Design leadership", "Design operations", "AI adoption", "AI governance", "Design maturity assessment"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Ways to work with Treehouse",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI workshop", "description": "A one-day workshop to find where AI fits in your team's work." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Design and AI maturity assessment", "description": "A two-to-three-week review of how your team works, with a prioritized plan." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Monthly partnership", "description": "Ongoing support to deliver the plan alongside your team." } }
+    ]
+  }
+}
+</script>
+<style>
+/* Brand tokens from the Treehouse 18x24 poster: electric lime on white and parchment,
+   one sans (Space Grotesk 400/500), 28px cards, pill tags, no shadows. */
+:root {
+  --lime: #beff50;
+  --ink: #14140f;
+  --char: #30302a;
+  --graphite: #5f5f56;   /* poster #6e6e64, darkened slightly for 4.5:1 on parchment */
+  --ash: #d2d2c8;
+  --parch: #f5f5eb;
+  --white: #ffffff;
+
+  --font: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --gutter: clamp(16px, 5vw, 72px);
+  --max: 1200px;
+  --radius: 28px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+h1, h2, h3 { font-weight: 500; text-wrap: balance; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+
+.skip { position: absolute; left: 16px; top: -100px; z-index: 10; background: var(--ink); color: var(--white); padding: 12px 18px; border-radius: 999px; text-decoration: none; }
+.skip:focus { top: 16px; }
+
+/* Shared pieces */
+.eb { font-size: 14px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+.hl {
+  background: linear-gradient(transparent 16%, var(--lime) 16%, var(--lime) 97%, transparent 97%);
+  padding: 0 .08em; border-radius: .08em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.pill { display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; font-weight: 500; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 12px 26px; border-radius: 999px;
+  font: 500 17px/1.2 var(--font); text-decoration: none; border: 2px solid var(--ink);
+  transition: transform .15s ease;
+}
+.btn-dark { background: var(--ink); color: var(--white); }
+.btn-dark:hover { transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--parch); }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn-dark:hover { transform: none; } }
+
+.section { padding-block: clamp(56px, 8vw, 104px); }
+.section-head { display: grid; gap: 12px; max-width: 760px; }
+.section-head h2 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1.02; letter-spacing: -0.035em; }
+.section-head p { color: var(--graphite); font-size: 19px; max-width: 62ch; }
+
+/* Header */
+.site-header { padding-block: 20px; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 500; letter-spacing: -0.03em; text-decoration: none; }
+.logo .m { width: 40px; height: 40px; border-radius: 12px; background: var(--lime); display: grid; place-items: center; flex: none; }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a:not(.btn) { text-decoration: none; font-size: 16px; color: var(--char); padding-block: 8px; }
+.nav a:not(.btn):hover { text-decoration: underline; text-underline-offset: 4px; }
+.nav .btn { white-space: nowrap; }
+@media (max-width: 760px) { .nav a:not(.btn) { display: none; } .nav .btn { padding-inline: 16px; font-size: 15px; } }
+
+/* Hero */
+.hero { padding-block: clamp(32px, 6vw, 72px) clamp(48px, 7vw, 88px); }
+.chip { background: var(--parch); padding: 8px 16px; font-size: 15px; }
+.chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); }
+.hero h1 { margin-top: 24px; font-size: clamp(44px, 8.6vw, 112px); line-height: .96; letter-spacing: -0.045em; max-width: 13ch; }
+.lede { margin-top: 28px; max-width: 46ch; font-size: clamp(19px, 2.1vw, 24px); line-height: 1.4; color: var(--graphite); }
+.lede b { color: var(--ink); font-weight: 500; }
+.hero-actions { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+.hero-note { font-size: 15px; color: var(--graphite); }
+
+/* Now accepting band */
+.only { background: var(--ink); color: var(--white); }
+.only .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding-block: 26px; }
+.only .tag { background: var(--lime); color: var(--ink); padding: 6px 16px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
+.only p { font-size: clamp(22px, 3vw, 34px); line-height: 1.15; font-weight: 500; letter-spacing: -0.025em; }
+.only em { font-style: normal; color: var(--lime); }
+
+/* Problems */
+.problems { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.problem { padding-top: 22px; border-top: 2px solid var(--ink); }
+.problem h3 { font-size: 23px; line-height: 1.2; letter-spacing: -0.02em; }
+.problem p { margin-top: 10px; color: var(--graphite); }
+@media (max-width: 860px) { .problems { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Services */
+.services { background: var(--parch); }
+.service-grid { margin-top: 44px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.service { background: var(--white); border-radius: var(--radius); padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.service .tag { align-self: flex-start; background: var(--lime); padding: 4px 14px; font-size: 14px; }
+.service h3 { font-size: clamp(26px, 2.8vw, 34px); line-height: 1.05; letter-spacing: -0.03em; }
+.service .sum { font-size: 19px; color: var(--char); }
+.service dl { display: grid; gap: 12px; padding-top: 16px; border-top: 2px solid var(--ash); margin-top: auto; }
+.service dt { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+.service dd { color: var(--char); }
+.service dd ul { display: grid; gap: 6px; }
+.service dd li { padding-left: 20px; position: relative; }
+.service dd li::before { content: ''; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
+@media (max-width: 860px) { .service-grid { grid-template-columns: 1fr; } }
+
+/* Approach: a real sequence, so it is drawn as one */
+.steps { list-style: none; padding: 0; margin-top: 52px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; counter-reset: step; }
+.step { position: relative; padding-top: 48px; min-width: 0; }
+.step::before { content: ''; position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--white); border: 3px solid var(--ink); }
+.step::after { content: ''; position: absolute; left: 28px; right: -32px; top: 12px; height: 3px; background: var(--ink); }
+.step:last-child::after { right: 0; background: linear-gradient(90deg, var(--ink), transparent); }
+.step.start::before { background: var(--lime); }
+.step .len { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+.step h3 { margin-top: 6px; font-size: 30px; letter-spacing: -0.025em; }
+.step .what { margin-top: 6px; font-size: 19px; color: var(--char); }
+.step ul { margin-top: 16px; display: grid; gap: 6px; color: var(--graphite); }
+.step li { padding-left: 18px; position: relative; }
+.step li::before { content: '→'; position: absolute; left: 0; }
+.price { margin-top: 20px; display: inline-flex; background: var(--parch); padding: 8px 16px; font-size: 15px; }
+.placeholder { background: #fff3b0; color: var(--ink); border-radius: 4px; padding: 0 4px; }
+.steps-note { margin-top: 36px; color: var(--graphite); }
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; gap: 0; }
+  .step { padding-top: 0; padding-left: 48px; padding-bottom: 36px; }
+  .step::after { left: 12px; right: auto; top: 28px; bottom: 0; width: 3px; height: auto; }
+  .step:last-child { padding-bottom: 0; }
+  .step:last-child::after { display: none; }
+}
+
+/* Comparison */
+.compare { background: var(--parch); }
+.table-scroll { margin-top: 40px; overflow-x: auto; border-radius: var(--radius); background: var(--white); }
+table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 17px; }
+th, td { text-align: left; vertical-align: top; padding: 18px 22px; border-bottom: 2px solid var(--parch); }
+thead th { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+tbody th { font-weight: 500; width: 22%; }
+td { color: var(--char); }
+.us { background: #f1ffd8; color: var(--ink); }
+thead .us { background: var(--lime); color: var(--ink); }
+tr:last-child th, tr:last-child td { border-bottom: 0; }
+
+/* Team */
+.team-card { margin-top: 44px; background: var(--ink); color: var(--white); border-radius: var(--radius); padding: clamp(28px, 4vw, 48px); display: grid; gap: 36px; }
+.team-card h3 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.08; letter-spacing: -0.03em; max-width: 22ch; }
+.team-card h3 .hl { color: var(--ink); }
+.team-card .eb { color: #c9c9bd; }
+.xp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.xp div { border-left: 2px solid #4a4a42; padding-left: 20px; }
+.xp b { display: block; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; }
+.xp span { display: block; margin-top: 6px; color: #c9c9bd; }
+.why-names { display: flex; gap: 16px; align-items: flex-start; background: #24241e; border-radius: 20px; padding: 20px 24px; }
+.why-names p { color: #e4e4da; max-width: 70ch; }
+.why-names b { color: var(--lime); font-weight: 500; }
+@media (max-width: 860px) { .xp { grid-template-columns: 1fr; } }
+
+/* FAQ */
+.faq-list { margin-top: 36px; border-top: 2px solid var(--ink); max-width: 880px; }
+.faq-list details { border-bottom: 2px solid var(--ash); }
+.faq-list summary {
+  cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding-block: 22px; font-size: 21px; font-weight: 500; letter-spacing: -0.015em;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: '+'; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--parch); display: grid; place-items: center; font-size: 22px; line-height: 1; }
+.faq-list details[open] summary::after { content: '−'; background: var(--lime); }
+.faq-list details p { padding-bottom: 24px; color: var(--graphite); max-width: 66ch; }
+
+/* Contact */
+.cta { background: var(--lime); }
+.cta .wrap { padding-block: clamp(56px, 8vw, 96px); display: grid; gap: 22px; }
+.cta .eb { color: var(--char); }
+.cta h2 { font-size: clamp(40px, 6.4vw, 80px); line-height: .98; letter-spacing: -0.04em; max-width: 14ch; }
+.cta p { color: var(--char); font-size: 19px; max-width: 54ch; }
+.cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+.email { font-size: 19px; font-weight: 500; }
+.email span { user-select: all; }
+
+/* Footer */
+.site-footer { background: var(--ink); color: #c9c9bd; font-size: 15px; }
+.site-footer .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+.site-footer a { color: var(--white); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Treehouse, home">
+      <span class="m" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 38 38" fill="none" stroke="#14140f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4 6 18h7l-5 7h22l-5-7h7L19 4Z"/><path d="M19 25v9"/></svg></span>
+      Treehouse
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#approach">How we work</a>
+      <a href="#team">Who we are</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-dark" href="#contact">Book an intro call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap">
+      <span class="pill chip"><i aria-hidden="true"></i>Design &amp; AI studio · Toronto</span>
+      <h1 id="hero-title">We make your team work <span class="hl">better with&nbsp;AI.</span></h1>
+      <p class="lede">We don't build your product. We help your team <b>set a design vision, scale how design works, and adopt AI workflows</b> that fit your size and culture.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark" href="#contact">Book a free intro call</a>
+        <a class="btn btn-ghost" href="#approach">See how we work</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="only" aria-label="Who we're taking on">
+    <div class="wrap">
+      <span class="pill tag">Now accepting</span>
+      <p>Clients who are <em>nonprofits</em> or <em>using AI for good.</em></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="problems-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Where teams get stuck</span>
+        <h2 id="problems-title">Three problems we hear most</h2>
+      </div>
+      <ul class="problems">
+        <li class="problem">
+          <h3>Everyone is trying AI, but nothing is shared.</h3>
+          <p>People test tools on their own. Prompts, results and lessons never become a team practice.</p>
+        </li>
+        <li class="problem">
+          <h3>Design is growing faster than its process.</h3>
+          <p>More people and more projects, with the same ad-hoc reviews and handoffs.</p>
+        </li>
+        <li class="problem">
+          <h3>Leaders can't see what design is worth.</h3>
+          <p>Without a direction tied to metrics, design is hard to fund and easy to cut.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section services" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">What we do</span>
+        <h2 id="services-title">Four things, <span class="hl">done well.</span></h2>
+        <p>Each one leaves your team able to keep going without us.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service">
+          <span class="pill tag">Vision</span>
+          <h3>Design vision tied to metrics</h3>
+          <p class="sum">A direction leaders can fund and measure.</p>
+          <dl>
+            <div><dt>For</dt><dd>Leaders who need design to show its impact.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>A design vision and principles</li><li>A few metrics linked to your goals</li><li>A roadmap leadership can review</li></ul></dd></div>
+          </dl>
+        </article>
+        <article class="service">
+          <span class="pill tag">Design operations</span>
+          <h3>Scaling design operations</h3>
+          <p class="sum">Rituals and standards that hold up as you grow.</p>
+          <dl>
+            <div><dt>For</dt><dd>Design teams adding people, products or partners.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>Critique and review rituals</li><li>Shared design standards</li><li>Clear roles and onboarding</li></ul></dd></div>
+          </dl>
+        </article>
+        <article class="service">
+          <span class="pill tag">AI workflows</span>
+          <h3>AI workflows, tailored to you</h3>
+          <p class="sum">Built for your team's size, tools and culture.</p>
+          <dl>
+            <div><dt>For</dt><dd>Teams trying AI without a shared approach.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>A map of where AI helps, and where it shouldn't</li><li>Tested workflows for your real work</li><li>Hands-on training for the team</li></ul></dd></div>
+          </dl>
+        </article>
+        <article class="service">
+          <span class="pill tag">AI operations</span>
+          <h3>AI operations that last</h3>
+          <p class="sum">Guardrails that keep AI useful after we leave.</p>
+          <dl>
+            <div><dt>For</dt><dd>Organizations that handle sensitive data or public trust.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>Clear AI use guidelines</li><li>Review steps for privacy and bias</li><li>Owners and a schedule to keep it current</li></ul></dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">How we work</span>
+        <h2 id="approach-title">Start small. Go further if it's working.</h2>
+        <p>Most clients start with the workshop. You can stop after any step.</p>
+      </div>
+      <ol class="steps">
+        <li class="step start">
+          <span class="len">1 day</span>
+          <h3>Workshop</h3>
+          <p class="what">Find where AI fits.</p>
+          <ul><li>Your team, your real work</li><li>A shortlist of where to start</li></ul>
+          <span class="pill price">From <span class="placeholder">[add price]</span></span>
+        </li>
+        <li class="step">
+          <span class="len">2–3 weeks</span>
+          <h3>Assessment</h3>
+          <p class="what">A maturity review and plan.</p>
+          <ul><li>How design and AI work today</li><li>A prioritized plan with owners</li></ul>
+          <span class="pill price">From <span class="placeholder">[add price]</span></span>
+        </li>
+        <li class="step">
+          <span class="len">Monthly</span>
+          <h3>Partnership</h3>
+          <p class="what">We deliver it alongside you.</p>
+          <ul><li>Regular working sessions</li><li>Coaching for your leads</li></ul>
+          <span class="pill price">From <span class="placeholder">[add price]</span> / month</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section compare" aria-labelledby="compare-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Why Treehouse</span>
+        <h2 id="compare-title">We work on your team, not your product</h2>
+        <p>Agencies build things for you. Courses teach general skills. We change how your team works, then step back.</p>
+      </div>
+      <div class="table-scroll" role="region" aria-label="Comparison table" tabindex="0">
+        <table>
+          <thead>
+            <tr><th scope="col"><span class="visually-hidden">Question</span></th><th scope="col">Product agency</th><th scope="col">AI course</th><th scope="col" class="us">Treehouse</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">What you get</th><td>A finished product</td><td>General AI skills</td><td class="us">A stronger team, with AI workflows that fit it</td></tr>
+            <tr><th scope="row">Who does the work</th><td>The agency</td><td>Each person, on their own</td><td class="us">Your team, with us alongside</td></tr>
+            <tr><th scope="row">Built for</th><td>Any client</td><td>Any role</td><td class="us">Design teams in nonprofits and AI-for-good organizations</td></tr>
+            <tr><th scope="row">When it ends</th><td>You maintain what they built</td><td>Follow-through is up to you</td><td class="us">Rituals, guardrails and owners stay in place</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="team" aria-labelledby="team-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Who you'll work with</span>
+        <h2 id="team-title">Two co-founders. Senior design leaders.</h2>
+      </div>
+      <div class="team-card">
+        <h3>Founders with <span class="hl">10+ years</span> leading design teams.</h3>
+        <div class="xp">
+          <div><b>Organizational change</b><span>Leading teams through growth and restructuring.</span></div>
+          <div><b>Regulated sectors</b><span>Banking and government.</span></div>
+          <div><b>Start-up speed</b><span>E-commerce and SaaS, from day one.</span></div>
+        </div>
+        <div class="why-names">
+          <p><b>Why no names here?</b> We keep Treehouse separate from our other professional work. On the intro call you'll get our names, LinkedIn profiles and full backgrounds.</p>
+        </div>
+      </div>
+      <!-- Add a real client quote here once you have one, with the client's permission.
+      <figure class="quote">
+        <blockquote>…</blockquote>
+        <figcaption>Name, role, organization</figcaption>
+      </figure>
+      -->
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Questions</span>
+        <h2 id="faq-title">Frequently asked questions</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Do you build our product or website?</summary>
+          <p>No. We help your team set direction, improve how design works, and adopt AI. Your team keeps building, and keeps the skills after we leave.</p>
+        </details>
+        <details>
+          <summary>What does it cost?</summary>
+          <p>Each step above shows a starting price. After the intro call we send a fixed quote for the step you choose.</p>
+        </details>
+        <details>
+          <summary>Who do you work with?</summary>
+          <p>Right now we take on nonprofits and organizations using AI for good. We work with design teams and the leaders they report to.</p>
+        </details>
+        <details>
+          <summary>Do you work in person?</summary>
+          <p>We're based in Toronto. Workshops can be in person in the Toronto area or remote. Assessments and partnerships work well remotely.</p>
+        </details>
+        <details>
+          <summary>Why don't you list your names?</summary>
+          <p>We keep Treehouse separate from our other professional work. You'll get our names, LinkedIn profiles and full backgrounds on the intro call, before you commit to anything.</p>
+        </details>
+        <details>
+          <summary>What happens after I book a call?</summary>
+          <p>We talk for 30 minutes about how your team works today. If we're a good fit, we suggest a first step. If we're not, we'll tell you.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <span class="eb">Free 30-minute intro call</span>
+      <h2 id="contact-title">Tell us how your team works today.</h2>
+      <p>Pick a time that suits you. We reply to every email within 2 business days.</p>
+      <div class="cta-actions">
+        <a class="btn btn-dark" href="https://cal.com/REPLACE-WITH-BOOKING-LINK" rel="noopener">Book a free intro call</a>
+        <p class="email">or email <span>hello@example.com</span></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Treehouse · Design &amp; AI studio · Toronto, Ontario</span>
+    <span>© 2026 Treehouse</span>
+  </div>
+</footer>
+</body>
+</html>
