@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Treehouse · Design &amp; AI studio in Toronto</title>
+<meta name="description" content="Treehouse is a Toronto design and AI studio. We help nonprofits and AI-for-good teams set a design vision, scale how design works, and adopt AI workflows that fit their size and culture.">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Treehouse · Design & AI studio in Toronto">
+<meta property="og:description" content="We make your team work better with AI. Design vision, design operations and AI workflows for nonprofits and AI-for-good teams.">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:locale" content="en_CA">
+<meta name="theme-color" content="#14140f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Crect width='38' height='38' rx='10' fill='%23beff50'/%3E%3Cpath d='M19 6 8 18h6l-4 6h18l-4-6h6L19 6Z M19 24v8' fill='none' stroke='%2314140f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('th-intro')){document.documentElement.classList.add('intro-on');sessionStorage.setItem('th-intro','1')}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Treehouse",
+  "description": "Design and AI studio. We help nonprofits and AI-for-good teams set a design vision, scale design operations, and adopt AI workflows. We don't build your product.",
+  "url": "https://example.com/",
+  "email": "hello@example.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+  "areaServed": "Toronto, Ontario, Canada",
+  "knowsAbout": ["Design leadership", "Design operations", "AI adoption", "AI governance", "Design maturity assessment"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Ways to work with Treehouse",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI workshop", "description": "A one-day workshop to find where AI fits in your team's work." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Design and AI maturity assessment", "description": "A two-to-three-week review of how your team works, with a prioritized plan." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Monthly partnership", "description": "Ongoing support to deliver the plan alongside your team." } }
+    ]
+  }
+}
+</script>
+<style>
+/* Brand tokens from the Treehouse 18x24 poster: electric lime on white and parchment,
+   one sans (Space Grotesk 400/500), 28px cards, pill tags, no shadows. */
+:root {
+  --lime: #beff50;
+  --ink: #14140f;
+  --char: #30302a;
+  --graphite: #5f5f56;   /* poster #6e6e64, darkened slightly for 4.5:1 on parchment */
+  --ash: #d2d2c8;
+  --parch: #f5f5eb;
+  --white: #ffffff;
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; /* headings, logo, labels, buttons */
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; /* all body content */
+  --gutter: clamp(16px, 5vw, 72px);
+  --max: 1200px;
+  --radius: 28px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+/* Leave room for the fixed header when jumping to a section. scroll-margin sits on the
+   target itself, so it also works when the page is scrolled inside an embedded frame. */
+main section[id]:not(.hero) { scroll-margin-top: calc(88px + env(safe-area-inset-top, 0px)); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; }
+.logo, .eb, .pill, .btn, .step .len, .service dt, thead th { font-family: var(--font-display); }
+ul { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+
+.skip { position: absolute; left: 16px; top: -100px; z-index: 10; background: var(--ink); color: var(--white); padding: 12px 18px; border-radius: 999px; text-decoration: none; }
+.skip:focus { top: 16px; }
+
+/* Shared pieces */
+.eb { font-size: 14px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+.hl {
+  background: linear-gradient(transparent 16%, var(--lime) 16%, var(--lime) 97%, transparent 97%);
+  padding: 0 .08em; border-radius: .08em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.pill { display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; font-weight: 500; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 12px 26px; border-radius: 999px;
+  font: 500 17px/1.2 var(--font-display); text-decoration: none; border: 2px solid var(--ink);
+  transition: transform .15s ease;
+}
+.btn-dark { background: var(--ink); color: var(--white); }
+.btn-dark:hover { transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--parch); }
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn-dark:hover { transform: none; } }
+
+.section { padding-block: clamp(56px, 8vw, 104px); }
+.section-head { display: grid; gap: 12px; max-width: 760px; }
+.section-head h2 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1.02; letter-spacing: -0.035em; }
+.section-head p { color: var(--graphite); font-size: 19px; max-width: 62ch; }
+.price-hl { color: var(--ink); font-weight: 600; }
+
+/* Header: sits over the dark hero */
+/* Hidden over the hero; slides in as a fixed bar once the hero has scrolled out of view.
+   visibility:hidden keeps the hidden links out of the keyboard tab order. */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  padding-block: calc(14px + env(safe-area-inset-top, 0px)) 14px;
+  background: rgba(20,20,15,.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  color: var(--white); border-bottom: 1px solid rgba(255,255,255,.08);
+  transform: translateY(-100%); visibility: hidden;
+  transition: transform .35s ease, visibility 0s linear .35s;
+}
+.site-header.is-visible { transform: none; visibility: visible; transition: transform .35s ease, visibility 0s; }
+@media (prefers-reduced-motion: reduce) { .site-header, .site-header.is-visible { transition: none; } }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { display: inline-flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 500; letter-spacing: -0.03em; text-decoration: none; }
+.logo .m { width: 40px; height: 40px; border-radius: 12px; background: var(--lime); display: grid; place-items: center; flex: none; }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a:not(.btn) { text-decoration: none; font-size: 16px; color: #e4e4da; padding-block: 8px; }
+.nav a:not(.btn):hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; }
+.nav .btn { white-space: nowrap; }
+@media (max-width: 760px) { .nav a:not(.btn) { display: none; } .nav .btn { padding-inline: 16px; font-size: 15px; } }
+.btn-lime { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+.btn-lime:hover { transform: translateY(-1px); }
+.btn-outline-light { background: transparent; color: var(--white); border-color: rgba(255,255,255,.55); }
+.btn-outline-light:hover { background: rgba(255,255,255,.08); border-color: var(--white); }
+.site-header :focus-visible, .hero :focus-visible { outline-color: var(--lime); }
+
+/* Hero: full-screen dark stage with a WebGL glow (canvas) behind the content.
+   The CSS gradients below are the fallback when WebGL is unavailable. */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: max(620px, 100svh); display: grid; place-items: center;
+  padding-block: 96px 170px; color: var(--white); text-align: center;
+  background:
+    radial-gradient(60% 55% at 80% 15%, rgba(130,165,60,.45), transparent 70%),
+    radial-gradient(50% 50% at 15% 60%, rgba(70,60,140,.40), transparent 70%),
+    radial-gradient(45% 45% at 60% 85%, rgba(25,110,100,.35), transparent 70%),
+    var(--ink);
+}
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+.hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 160px; z-index: -1; background: linear-gradient(transparent, var(--ink)); pointer-events: none; }
+.hero-content { position: relative; display: grid; justify-items: center; gap: 0; }
+.hero-content::before { content: ''; position: absolute; inset: -14% -12%; z-index: -1; background: radial-gradient(closest-side, rgba(20,20,15,.62), rgba(20,20,15,0)); pointer-events: none; }
+.headline { display: grid; }
+.headline > * { grid-area: 1 / 1; align-self: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 7.4vw, 100px); line-height: .98; letter-spacing: -0.045em; max-width: 15ch; margin-inline: auto; text-wrap: balance;
+  transition: opacity .9s ease, filter .9s ease, transform .9s ease; }
+.headline .fr { font-size: clamp(34px, 6.2vw, 84px); max-width: 17ch; opacity: 0; filter: blur(12px); transform: translateY(8px); }
+.headline.show-fr .en { opacity: 0; filter: blur(12px); transform: translateY(-8px); }
+.headline.show-fr .fr { opacity: 1; filter: none; transform: none; }
+.hero .hl { color: var(--ink); }
+.lede { margin-top: 28px; max-width: 50ch; font-size: clamp(18px, 1.9vw, 22px); line-height: 1.45; color: #dcdcd2; }
+.lede b { color: var(--white); font-weight: 500; }
+.hero-actions { margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 16px; }
+
+/* Spinning scroll badge */
+.scroll-badge { position: absolute; left: 50%; bottom: 36px; width: 108px; height: 108px; margin-left: -54px; display: grid; place-items: center; color: var(--white); text-decoration: none; border-radius: 50%; }
+.scroll-badge svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 16s linear infinite; }
+.scroll-badge text { font: 500 10.5px var(--font-display); letter-spacing: .32em; fill: currentColor; text-transform: uppercase; }
+.scroll-badge .core { width: 40px; height: 40px; border-radius: 12px; background: var(--lime); display: grid; place-items: center; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Pause control (WCAG 2.2.2) */
+.motion-toggle { position: absolute; right: var(--gutter); bottom: 32px; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: rgba(20,20,15,.5); color: #e4e4da; font: 500 13px var(--font-display); cursor: pointer; }
+.motion-toggle:hover { color: var(--white); border-color: rgba(255,255,255,.6); }
+.motion-toggle .ico { width: 10px; height: 10px; display: inline-block; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.motion-paused .motion-toggle .ico { border: 0; border-left: 9px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; width: 0; height: 0; }
+@media (max-width: 600px) { .motion-toggle { padding: 0; width: 40px; height: 40px; justify-content: center; } .motion-toggle .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+.motion-paused .scroll-badge svg.ring { animation-play-state: paused; }
+
+/* Intro ("hello toronto"): first visit per session only */
+.intro { display: none; }
+.intro-on .intro { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--ink); color: var(--white); cursor: pointer; transition: opacity .8s ease; }
+.intro .glow { position: absolute; width: 180px; height: 260px; border-radius: 50%; filter: blur(34px); opacity: .9;
+  background: radial-gradient(closest-side, rgba(170,215,90,.85), rgba(40,140,125,.55) 60%, rgba(90,75,170,.0)); transform: rotate(-24deg);
+  transition: transform 1s cubic-bezier(.7,0,.3,1), opacity 1s ease; animation: breathe 2.4s ease-in-out infinite alternate; }
+.intro p { position: relative; font: 400 clamp(22px, 3vw, 30px) var(--font-display); letter-spacing: -0.02em; transition: opacity .5s ease, filter .5s ease; }
+.intro.out { opacity: 0; pointer-events: none; }
+.intro.out .glow { transform: rotate(-24deg) scale(9); opacity: 0; }
+.intro.out p { opacity: 0; filter: blur(8px); }
+@keyframes breathe { to { transform: rotate(-18deg) scale(1.12); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-badge svg.ring { animation: none; }
+  .headline > * { transition: none; }
+}
+
+
+/* Problems */
+.problems { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.problem { padding-top: 22px; border-top: 2px solid var(--ink); }
+.problem h3 { font-size: 23px; line-height: 1.2; letter-spacing: -0.02em; }
+.problem p { margin-top: 10px; color: var(--graphite); }
+@media (max-width: 860px) { .problems { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Services */
+.services { background: var(--parch); }
+.service-grid { margin-top: 44px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+/* Each card spans 5 rows of the parent grid (tag, title, summary, For, You get) via subgrid,
+   so the same parts line up across cards in a row even when text wraps differently. */
+.service { background: var(--white); border-radius: var(--radius); padding: clamp(24px, 3vw, 36px); display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 14px; align-content: start; min-width: 0; }
+.service .tag { justify-self: start; align-self: start; background: var(--lime); padding: 4px 14px; font-size: 14px; }
+.service h3 { font-size: clamp(26px, 2.8vw, 34px); line-height: 1.05; letter-spacing: -0.03em; }
+.service .sum { font-size: 19px; color: var(--char); }
+.service dl { display: contents; }
+.service dl > div:first-child { border-top: 2px solid var(--ash); padding-top: 16px; }
+.service dd { margin-top: 4px; }
+.service dt { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+.service dd { color: var(--char); }
+.service dd ul { display: grid; gap: 6px; }
+.service dd li { padding-left: 20px; position: relative; }
+.service dd li::before { content: ''; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
+@media (max-width: 860px) { .service-grid { grid-template-columns: 1fr; } }
+
+/* Approach: the client's context feeds a 3-step staircase that rises with commitment */
+.context { margin-top: 40px; position: relative; background: var(--parch); border-radius: var(--radius); padding: 22px 24px 24px; display: grid; gap: 14px; }
+.context .eb { flex: none; color: var(--char); }
+.context ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.context li { display: flex; align-items: flex-start; gap: 12px; background: var(--white); border-radius: 18px; padding: 14px; font-size: 16px; font-weight: 500; line-height: 1.3; min-width: 0; }
+.context li small { display: block; margin-top: 3px; font-size: 14px; font-weight: 400; color: var(--graphite); }
+.context .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; flex: none; }
+.context::after { content: ''; position: absolute; left: 50%; bottom: -36px; width: 3px; height: 36px; background: var(--ink); transform: translateX(-50%); }
+
+.steps { list-style: none; padding: 0; margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.step { position: relative; min-width: 0; border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.step:nth-child(1) { margin-top: 64px; background: var(--white); border: 2px solid var(--ink); }
+.step:nth-child(2) { margin-top: 32px; background: var(--parch); }
+.step:nth-child(3) { background: var(--ink); color: var(--white); }
+.step + .step::before {
+  content: '→'; position: absolute; left: -32px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%; background: var(--lime); color: var(--ink); border: 3px solid var(--white);
+  display: grid; place-items: center; font-size: 18px; font-weight: 500; z-index: 1;
+}
+.step-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.step .icon { width: 56px; height: 56px; border-radius: 18px; background: var(--lime); display: grid; place-items: center; flex: none; }
+.step .len { background: var(--parch); padding: 6px 14px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+.step:nth-child(2) .len { background: var(--white); }
+.step:nth-child(3) .len { background: #2a2a24; color: var(--lime); }
+.step .first { align-self: flex-start; background: var(--lime); padding: 4px 12px; font-size: 13px; }
+.step h3 { font-size: 30px; line-height: 1.05; letter-spacing: -0.03em; }
+.step .what { font-size: 19px; color: var(--char); }
+.step:nth-child(3) .what { color: var(--white); }
+.step ul { display: grid; gap: 8px; color: var(--graphite); }
+.step:nth-child(3) ul { color: #c9c9bd; }
+.step ul li { padding-left: 30px; position: relative; }
+.step ul li::before { content: '✓'; position: absolute; left: 0; top: .15em; width: 20px; height: 20px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+.placeholder { background: #fff3b0; color: var(--ink); border-radius: 4px; padding: 0 4px; }
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; gap: 36px; }
+  .step:nth-child(n) { margin-top: 0; }
+  .step + .step::before { content: '↓'; left: 50%; top: -38px; transform: translateX(-50%); }
+  .context ul { grid-template-columns: 1fr; }
+}
+
+/* Comparison */
+.compare { background: var(--parch); }
+.table-scroll { margin-top: 40px; overflow-x: auto; border-radius: var(--radius); background: var(--white); }
+table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 17px; }
+th, td { text-align: left; vertical-align: top; padding: 18px 22px; border-bottom: 2px solid var(--parch); }
+thead th { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+tbody th { font-weight: 500; width: 22%; }
+td { color: var(--char); }
+.us { background: #f1ffd8; color: var(--ink); }
+thead .us { background: var(--lime); color: var(--ink); }
+tr:last-child th, tr:last-child td { border-bottom: 0; }
+
+/* Team */
+.team-card { margin-top: 44px; background: var(--ink); color: var(--white); border-radius: var(--radius); padding: clamp(28px, 4vw, 48px); display: grid; gap: 36px; }
+.team-card h3 { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.08; letter-spacing: -0.03em; max-width: 22ch; }
+.team-card h3 .hl { color: var(--ink); }
+.team-card .eb { color: #c9c9bd; }
+.xp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.xp div { border-left: 2px solid #4a4a42; padding-left: 20px; }
+.xp b { display: block; font-size: 21px; font-weight: 500; letter-spacing: -0.02em; }
+.xp span { display: block; margin-top: 6px; color: #c9c9bd; }
+.why-names { display: flex; gap: 16px; align-items: flex-start; background: #24241e; border-radius: 20px; padding: 20px 24px; }
+.why-names p { color: #e4e4da; max-width: 70ch; }
+.why-names b { color: var(--lime); font-weight: 500; }
+@media (max-width: 860px) { .xp { grid-template-columns: 1fr; } }
+
+/* FAQ */
+.faq-list { margin-top: 36px; border-top: 2px solid var(--ink); max-width: 880px; }
+.faq-list details { border-bottom: 2px solid var(--ash); }
+.faq-list summary {
+  cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding-block: 22px; font-size: 21px; font-weight: 500; letter-spacing: -0.015em;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: '+'; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--parch); display: grid; place-items: center; font-size: 22px; line-height: 1; }
+.faq-list details[open] summary::after { content: '−'; background: var(--lime); }
+.faq-list details p { padding-bottom: 24px; color: var(--graphite); max-width: 66ch; }
+
+/* Contact */
+.cta { background: var(--lime); }
+.cta .wrap { padding-block: clamp(56px, 8vw, 96px); display: grid; gap: 22px; }
+.cta .eb { color: var(--char); }
+.cta h2 { font-size: clamp(40px, 6.4vw, 80px); line-height: .98; letter-spacing: -0.04em; max-width: 14ch; }
+.cta p { color: var(--char); font-size: 19px; max-width: 54ch; }
+.cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+.email { font-size: 19px; font-weight: 500; }
+.email span { user-select: all; }
+
+/* Footer */
+.site-footer { background: var(--ink); color: #c9c9bd; font-size: 15px; }
+.site-footer .wrap { padding-block: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+.site-footer a { color: var(--white); }
+</style>
+</head>
+<body>
+<div class="intro" aria-hidden="true"><span class="glow"></span><p>hello toronto</p></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Treehouse, home">
+      <span class="m" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 38 38" fill="none" stroke="#14140f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 4 6 18h7l-5 7h22l-5-7h7L19 4Z"/><path d="M19 25v9"/></svg></span>
+      Treehouse
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#approach">How we work</a>
+      <a href="#team">Who we are</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-lime" href="#contact">Book an intro call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="wrap hero-content">
+      <div class="headline">
+        <h1 id="hero-title" class="en">We make your team work <span class="hl">better with&nbsp;AI.</span></h1>
+        <p class="fr" lang="fr" aria-hidden="true">Nous aidons votre équipe à mieux travailler <span class="hl">avec l’IA.</span></p>
+      </div>
+      <p class="lede">We don't build your product. We help your team <b>set a design vision, scale how design works, and adopt AI workflows</b> that fit your size and culture.</p>
+      <div class="hero-actions">
+        <a class="btn btn-lime" href="#contact">Book a free intro call</a>
+        <a class="btn btn-outline-light" href="#approach">See how we work</a>
+      </div>
+    </div>
+    <a class="scroll-badge" href="#services" aria-label="Scroll to services">
+      <svg class="ring" viewBox="0 0 108 108" aria-hidden="true"><defs><path id="badge-circle" d="M54,54 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs><text><textPath href="#badge-circle" textLength="248" lengthAdjust="spacing">Scroll down · Scroll down ·</textPath></text></svg>
+      <span class="core"><svg width="22" height="22" viewBox="0 0 38 38" fill="none" stroke="#14140f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 4 6 18h7l-5 7h22l-5-7h7L19 4Z"/><path d="M19 25v9"/></svg></span>
+    </a>
+    <button class="motion-toggle" type="button" aria-pressed="false"><span class="ico" aria-hidden="true"></span><span class="lbl">Pause motion</span></button>
+  </section>
+
+  <section class="section" aria-labelledby="problems-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Where teams get stuck</span>
+        <h2 id="problems-title">Three problems we hear most</h2>
+      </div>
+      <ul class="problems">
+        <li class="problem">
+          <h3>Everyone is trying AI, but nothing is shared.</h3>
+          <p>People test tools on their own. Prompts, results and lessons never become a team practice.</p>
+        </li>
+        <li class="problem">
+          <h3>Design is growing faster than its process.</h3>
+          <p>More people and more projects, with the same ad-hoc reviews and handoffs.</p>
+        </li>
+        <li class="problem">
+          <h3>Leaders can't see what design is worth.</h3>
+          <p>Without a direction tied to metrics, design is hard to fund and easy to cut.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section services" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">What we do</span>
+        <h2 id="services-title">Four things, <span class="hl">done well.</span></h2>
+        <p>Each one leaves your team able to keep going without us.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service">
+          <span class="pill tag">Vision</span>
+          <h3>Design vision tied to metrics</h3>
+          <p class="sum">A direction leaders can fund and measure.</p>
+          <dl>
+            <div><dt>For</dt><dd>Leaders who need design to show its impact.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>A design vision and principles</li><li>A few metrics linked to your goals</li><li>A roadmap leadership can review</li></ul></dd></div>
+          </dl>
+        </article>
+        <article class="service">
+          <span class="pill tag">Design operations</span>
+          <h3>Scaling design operations</h3>
+          <p class="sum">Rituals and standards that hold up as you grow.</p>
+          <dl>
+            <div><dt>For</dt><dd>Design teams adding people, products or partners.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>Critique and review rituals</li><li>Shared design standards</li><li>Clear roles and onboarding</li></ul></dd></div>
+          </dl>
+        </article>
+        <article class="service">
+          <span class="pill tag">AI workflows</span>
+          <h3>AI workflows, tailored to you</h3>
+          <p class="sum">Built for your team's size, tools and culture.</p>
+          <dl>
+            <div><dt>For</dt><dd>Teams trying AI without a shared approach.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>A map of where AI helps, and where it shouldn't</li><li>Tested workflows for your real work</li><li>Hands-on training for the team</li></ul></dd></div>
+          </dl>
+        </article>
+        <article class="service">
+          <span class="pill tag">AI operations</span>
+          <h3>AI operations that last</h3>
+          <p class="sum">Guardrails that keep AI useful after we leave.</p>
+          <dl>
+            <div><dt>For</dt><dd>Organizations that handle sensitive data or public trust.</dd></div>
+            <div><dt>You get</dt><dd><ul><li>Clear AI use guidelines</li><li>Review steps for privacy and bias</li><li>Owners and a schedule to keep it current</li></ul></dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">How we work</span>
+        <h2 id="approach-title">Built around your team, <span class="hl">not a template.</span></h2>
+        <p>We learn your team's size, tools, culture and the rules your sector works under. Every step is fitted to that, and so is the price, which we set together after a free intro call. <strong class="price-hl"><span class="hl">Nonprofits and AI-for-good start-ups get our lowest rates.</span></strong> Most teams start with the workshop, and you can stop after any step.</p>
+      </div>
+      <div class="context">
+        <span class="eb">We fit every step to</span>
+        <ul>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14c2.8.2 4.5 1.9 4.5 5"/></svg></span><span>Team size &amp; structure<small>who does what, and how many</small></span></li>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span><span>Tools you already use<small>design, docs and AI tools</small></span></li>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h13a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H10l-4 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span><span>Culture &amp; ways of working<small>how decisions get made</small></span></li>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></span><span>Sector rules<small>privacy, funding, public trust</small></span></li>
+        </ul>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <div class="step-top"><span class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="11" y="11" width="10" height="10" rx="2" fill="#beff50"/><path d="M14 15h4M14 18h2"/></svg></span><span class="pill len">1 day</span></div>
+          <span class="pill first">Most teams start here</span>
+          <h3>Workshop</h3>
+          <p class="what">Find where AI fits.</p>
+          <ul><li>Your team, your real work</li><li>A shortlist of where to start</li></ul>
+        </li>
+        <li class="step">
+          <div class="step-top"><span class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17a9 9 0 0 1 18 0"/><path d="M12 17l4.5-5.5"/><circle cx="12" cy="17" r="1.6" fill="#14140f"/><path d="M6.5 13.5l1 .8M12 8v1.3M17.5 13.5l-1 .8"/></svg></span><span class="pill len">2–3 weeks</span></div>
+          <h3>Assessment</h3>
+          <p class="what">A maturity review and plan.</p>
+          <ul><li>How design and AI work today</li><li>A prioritized plan with owners</li></ul>
+        </li>
+        <li class="step">
+          <div class="step-top"><span class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></span><span class="pill len">Monthly</span></div>
+          <h3>Partnership</h3>
+          <p class="what">We deliver it alongside you.</p>
+          <ul><li>Regular working sessions</li><li>Coaching for your leads</li></ul>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section compare" aria-labelledby="compare-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Why Treehouse</span>
+        <h2 id="compare-title">We work on your team, not your product</h2>
+        <p>Agencies build things for you. Courses teach general skills. We change how your team works, then step back.</p>
+      </div>
+      <div class="table-scroll" role="region" aria-label="Comparison table" tabindex="0">
+        <table>
+          <thead>
+            <tr><th scope="col"><span class="visually-hidden">Question</span></th><th scope="col">Product agency</th><th scope="col">AI course</th><th scope="col" class="us">Treehouse</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">What you get</th><td>A finished product</td><td>General AI skills</td><td class="us">A stronger team, with AI workflows that fit it</td></tr>
+            <tr><th scope="row">Who does the work</th><td>The agency</td><td>Each person, on their own</td><td class="us">Your team, with us alongside</td></tr>
+            <tr><th scope="row">Built for</th><td>Any client</td><td>Any role</td><td class="us">Design teams in nonprofits and AI-for-good organizations</td></tr>
+            <tr><th scope="row">When it ends</th><td>You maintain what they built</td><td>Follow-through is up to you</td><td class="us">Rituals, guardrails and owners stay in place</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="team" aria-labelledby="team-title">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Who you'll work with</span>
+        <h2 id="team-title">Two co-founders. Senior design leaders.</h2>
+      </div>
+      <div class="team-card">
+        <h3>Founders with <span class="hl">10+ years</span> leading design teams.</h3>
+        <div class="xp">
+          <div><b>Organizational change</b><span>Leading teams through growth and restructuring.</span></div>
+          <div><b>Regulated sectors</b><span>Banking and government.</span></div>
+          <div><b>Start-up speed</b><span>E-commerce and SaaS, from day one.</span></div>
+        </div>
+        <div class="why-names">
+          <p><b>Why no names here?</b> We keep Treehouse separate from our other professional work. On the intro call you'll get our names, LinkedIn profiles and full backgrounds.</p>
+        </div>
+      </div>
+      <!-- Add a real client quote here once you have one, with the client's permission.
+      <figure class="quote">
+        <blockquote>…</blockquote>
+        <figcaption>Name, role, organization</figcaption>
+      </figure>
+      -->
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eb">Questions</span>
+        <h2 id="faq-title">Frequently asked questions</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Do you build our product or website?</summary>
+          <p>No. We help your team set direction, improve how design works, and adopt AI. Your team keeps building, and keeps the skills after we leave.</p>
+        </details>
+        <details>
+          <summary>What does it cost?</summary>
+          <p>We set the price after a free intro call, once we understand your team, goals and budget. Nonprofits and AI-for-good start-ups get our lowest rates. You get a written quote before any work starts, and there is no cost to talk.</p>
+        </details>
+        <details>
+          <summary>Who do you work with?</summary>
+          <p>Right now we take on nonprofits and organizations using AI for good. We work with design teams and the leaders they report to.</p>
+        </details>
+        <details>
+          <summary>Do you work in person?</summary>
+          <p>We're based in Toronto. Workshops can be in person in the Toronto area or remote. Assessments and partnerships work well remotely.</p>
+        </details>
+        <details>
+          <summary>Why don't you list your names?</summary>
+          <p>We keep Treehouse separate from our other professional work. You'll get our names, LinkedIn profiles and full backgrounds on the intro call, before you commit to anything.</p>
+        </details>
+        <details>
+          <summary>What happens after I book a call?</summary>
+          <p>We talk for 30 minutes about how your team works today. If we're a good fit, we suggest a first step. If we're not, we'll tell you.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <span class="eb">Free 30-minute intro call</span>
+      <h2 id="contact-title">Tell us how your team works today.</h2>
+      <p>Pick a time that suits you. We reply to every email within 2 business days.</p>
+      <div class="cta-actions">
+        <a class="btn btn-dark" href="https://cal.com/REPLACE-WITH-BOOKING-LINK" rel="noopener">Book a free intro call</a>
+        <p class="email">or email <span>hello@example.com</span></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Treehouse · Design &amp; AI studio · Toronto, Ontario</span>
+    <span>© 2026 Treehouse</span>
+  </div>
+</footer>
+<script>
+(() => {
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.hero');
+  const headline = document.querySelector('.headline');
+  const toggle = document.querySelector('.motion-toggle');
+
+  /* Header: show only after the hero has scrolled fully out of view */
+  const header = document.querySelector('.site-header');
+  new IntersectionObserver(([e]) => header.classList.toggle('is-visible', !e.isIntersecting)).observe(hero);
+  let paused = reduce;
+
+  /* Intro: shown only when the <head> script set .intro-on */
+  const intro = document.querySelector('.intro');
+  if (root.classList.contains('intro-on')) {
+    const end = () => {
+      if (intro.classList.contains('out')) return;
+      intro.classList.add('out');
+      setTimeout(() => root.classList.remove('intro-on'), 900);
+    };
+    intro.addEventListener('click', end);
+    setTimeout(end, 1300);
+  }
+
+  /* Headline: English <-> French */
+  let swap = null;
+  const startSwap = () => { if (!swap) swap = setInterval(() => headline.classList.toggle('show-fr'), 4500); };
+  const stopSwap = () => { clearInterval(swap); swap = null; headline.classList.remove('show-fr'); };
+
+  /* Pause control */
+  const setPaused = (v) => {
+    paused = v;
+    root.classList.toggle('motion-paused', v);
+    toggle.setAttribute('aria-pressed', String(v));
+    toggle.querySelector('.lbl').textContent = v ? 'Play motion' : 'Pause motion';
+    v ? stopSwap() : startSwap();
+    if (!v) requestFrame();
+  };
+  toggle.addEventListener('click', () => setPaused(!paused));
+
+  /* WebGL glow */
+  const canvas = document.querySelector('.hero-canvas');
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });
+  let requestFrame = () => {};
+  if (!gl) { canvas.remove(); }
+  else {
+    const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+    const fs = `precision mediump float;
+uniform vec2 r;uniform float t;uniform vec2 m;uniform float sc;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}
+void main(){
+  vec2 uv=gl_FragCoord.xy/r; float asp=r.x/r.y; vec2 p=vec2(uv.x*asp,uv.y);
+  vec2 mm=m-.5; float tt=t*.45;
+  vec3 ink=vec3(.078,.078,.059);
+  vec3 lime=vec3(.50,.64,.22), teal=vec3(.09,.44,.40), vio=vec3(.36,.29,.64);
+  float big=max(asp,1.);
+  /* the "sphere": drifts on a slow loop, leans toward the pointer, rises as you scroll */
+  vec2 S=vec2(asp*.5+.30*big+.18*sin(tt*.55),.78+.13*cos(tt*.43))+mm*vec2(.20,.16)+vec2(-.05,.30)*sc;
+  vec2 q=p-S; float d=length(q); float a=atan(q.y,q.x);
+  /* organic, wobbling edge instead of a perfect circle */
+  float R=.62*big*(1.+.08*sin(a*2.+tt*.9)+.05*sin(a*3.-tt*.7))+.09*(n(q/max(d,1e-4)*1.6+vec2(tt*.3,tt*.5))-.5);
+  float e=d-R;
+  /* flowing colour field */
+  vec2 w=p*1.2+vec2(fbm(p*1.3+vec2(tt*.6,0.)),fbm(p*1.3+vec2(0.,-tt*.5)+3.7));
+  float f=fbm(w*1.4+tt*.45);
+  vec3 col=ink;
+  float glow=exp(-max(e,0.)*2.);
+  col+=mix(vio,teal,smoothstep(.3,.7,f))*glow*.55*(.5+.5*f);
+  col+=vio*.10*smoothstep(.9,.1,uv.y)*f;
+  /* inside: light sweeps around the edge and bands of light flow across the surface */
+  float inside=smoothstep(.003,-.003,e);
+  float k=clamp(d/R,0.,1.);
+  float la=tt*.6+mm.x*1.6+3.6; vec2 L=vec2(cos(la),sin(la));
+  float lit=clamp(dot(q/max(d,1e-4),L)*.5+.5,0.,1.);
+  float band=smoothstep(.35,.85,fbm(q*2.2+vec2(tt*.7,-tt*.5)+f));
+  vec3 c=mix(teal*.7,lime,smoothstep(.3,.95,lit*.7+band*.5));
+  c*=.10+.80*pow(k,1.8)*lit+.45*band*k+.10*f;
+  float e2=length(q-vec2(.06,.035)*sin(tt*.8))-R*.93;
+  c+=vec3(.75,.85,.55)*exp(-abs(e2)*120.)*.30*lit;
+  c*=1.-.5*smoothstep(-.03,0.,e)*(1.-lit);
+  col=mix(col,c,inside);
+  /* sharp rim highlight with a thin dark line just inside it */
+  col+=vec3(.86,.96,.72)*exp(-abs(e)*200.)*(.25+.75*lit)*.6;
+  col*=1.-.25*exp(-abs(e+.012)*160.);
+  col=mix(vec3(dot(col,vec3(.333))),col,.82);
+  col*=1.-.38*length(uv-vec2(.5,.45));
+  col+=(h(gl_FragCoord.xy+fract(t*.37)*91.)-.5)*.045;
+  gl_FragColor=vec4(col,1.);
+}`;
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { canvas.remove(); }
+    else {
+      gl.useProgram(prog);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'a');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const uR = gl.getUniformLocation(prog, 'r'), uT = gl.getUniformLocation(prog, 't'), uM = gl.getUniformLocation(prog, 'm'), uS = gl.getUniformLocation(prog, 'sc');
+
+      const scale = Math.min(window.devicePixelRatio || 1, 1.5) * 0.6;
+      const resize = () => {
+        const w = Math.max(1, Math.round(canvas.clientWidth * scale)), h = Math.max(1, Math.round(canvas.clientHeight * scale));
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); }
+      };
+
+      /* Pointer: mouse on desktop, finger on touch; drifts back when idle */
+      const ptr = { x: .5, y: .5 }, target = { x: .5, y: .5 };
+      let lastMove = -1e9;
+      const onMove = (e) => {
+        const b = hero.getBoundingClientRect();
+        target.x = (e.clientX - b.left) / b.width;
+        target.y = 1 - (e.clientY - b.top) / b.height;
+        lastMove = performance.now();
+      };
+      hero.addEventListener('pointermove', onMove, { passive: true });
+      hero.addEventListener('pointerdown', onMove, { passive: true });
+
+      let visible = true, raf = 0, last = performance.now(), clock = 0;
+      const frame = (now) => {
+        raf = 0;
+        const dt = Math.min(now - last, 100); last = now;
+        if (!paused) clock += dt / 1000;
+        if (now - lastMove > 3000) { target.x = .5 + .18 * Math.sin(clock * .23); target.y = .5 + .14 * Math.cos(clock * .19); }
+        ptr.x += (target.x - ptr.x) * .04; ptr.y += (target.y - ptr.y) * .04;
+        resize();
+        gl.uniform2f(uR, canvas.width, canvas.height);
+        gl.uniform1f(uT, clock);
+        gl.uniform2f(uM, ptr.x, ptr.y);
+        gl.uniform1f(uS, Math.min(Math.max(scrollY / hero.offsetHeight, 0), 1));
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        if (!paused && visible && !document.hidden) raf = requestAnimationFrame(frame);
+      };
+      requestFrame = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) requestFrame(); }).observe(hero);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) requestFrame(); });
+      addEventListener('resize', requestFrame);
+      addEventListener('scroll', requestFrame, { passive: true });
+      requestFrame();
+    }
+  }
+
+  if (reduce) { setPaused(true); toggle.hidden = true; }
+  else startSwap();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<title>Treehouse Market Research</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap">
+<style>
+/* Layout: one readable column, brand-coloured section markers, wide tables scroll in place.
+   Single light theme on purpose: it matches the Treehouse poster. */
+:root {
+  --lime: #beff50; --ink: #14140f; --char: #30302a; --graphite: #5f5f56;
+  --ash: #d2d2c8; --parch: #f5f5eb; --white: #ffffff; --tint: #f1ffd8;
+  --font: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--white); color: var(--ink); font: 400 17px/1.6 var(--font); }
+.page { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; }
+h1, h2, h3 { font-weight: 500; letter-spacing: -0.03em; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(36px, 6vw, 56px); line-height: 1; }
+h2 { font-size: clamp(26px, 4vw, 34px); line-height: 1.1; margin-top: 64px; padding-top: 20px; border-top: 3px solid var(--ink); }
+h3 { font-size: 21px; margin-top: 32px; }
+p, ul, ol { margin: 12px 0 0; }
+ul, ol { padding-left: 22px; }
+li + li { margin-top: 6px; }
+a { color: var(--ink); text-decoration-color: #8fbf3a; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.eb { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
+.hl { background: linear-gradient(transparent 16%, var(--lime) 16%, var(--lime) 97%, transparent 97%); padding: 0 .06em; }
+.meta { margin-top: 16px; color: var(--graphite); }
+.note { margin-top: 20px; background: var(--parch); border-radius: 16px; padding: 16px 20px; font-size: 15px; color: var(--char); }
+.top5 { counter-reset: n; list-style: none; padding: 0; margin-top: 20px; display: grid; gap: 12px; }
+.top5 li { counter-increment: n; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; background: var(--parch); border-radius: 18px; padding: 16px 18px; margin: 0; }
+.top5 li::before { content: counter(n); width: 32px; height: 32px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; font-weight: 500; }
+.top5 b { font-weight: 500; }
+.label { display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; border-radius: 999px; padding: 2px 10px; margin-right: 6px; vertical-align: 2px; border: 1.5px solid var(--ink); }
+.label.research { background: var(--lime); }
+.label.standard { background: var(--ink); color: var(--white); }
+.label.opinion { background: var(--white); }
+.practice { margin-top: 24px; padding-left: 18px; border-left: 3px solid var(--ash); }
+.practice h3 { margin-top: 0; }
+blockquote { margin: 12px 0 0; padding: 10px 16px; background: var(--parch); border-radius: 12px; font-size: 16px; }
+blockquote cite { display: block; margin-top: 4px; font-style: normal; font-size: 14px; color: var(--graphite); }
+.so { margin-top: 8px; }
+.so b { font-weight: 500; }
+.scroll { overflow-x: auto; margin-top: 20px; border: 2px solid var(--ash); border-radius: 16px; }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--ash); }
+thead th { background: var(--parch); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--graphite); font-weight: 500; }
+tbody th { font-weight: 500; }
+tr.us td, tr.us th { background: var(--tint); }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+.check { list-style: none; padding: 0; }
+.check li { padding-left: 30px; position: relative; }
+.check li::before { content: ''; position: absolute; left: 0; top: .3em; width: 16px; height: 16px; border-radius: 5px; border: 2px solid var(--ink); }
+.sources li { font-size: 15px; word-break: break-word; }
+</style>
+
+<main class="page">
+  <span class="eb">Treehouse · Design &amp; AI studio · Toronto</span>
+  <h1>Landing page research: <span class="hl">best practices &amp; competitors</span></h1>
+  <p class="meta">Prepared October 2026 for the Treehouse co-founders. Based on the Treehouse poster plus web research.</p>
+  <div class="note"><b>How to read this.</b> Each finding has a label. <span class="label research">Research</span> means a study with a stated method. <span class="label standard">Standard</span> means an official rule or guideline (W3C, Google). <span class="label opinion">Opinion</span> means an expert's view or my judgement. The research environment blocked direct visits to most websites, so competitor details and some quotes come from search-result excerpts. Please open the links to confirm before quoting them publicly.</div>
+
+  <h2>Summary: top 5 recommendations</h2>
+  <ol class="top5">
+    <li><span><b>Lead with your niche, in the first screen.</b> "Design &amp; AI for nonprofits and AI-for-good teams" is rare in Toronto. Buyers pick specialists over generalists.</span></li>
+    <li><span><b>Say what you don't do.</b> "We don't build your product" is your clearest difference from Toronto agencies like Akendi and Bridgeable.</span></li>
+    <li><span><b>Show starting prices.</b> Usability research found business buyers get frustrated and leave when prices are hidden. Most consultancies hide them, so this also sets you apart.</span></li>
+    <li><span><b>Make the 1-day workshop the easy first step.</b> A small, fixed-price offer lowers the risk for a nonprofit with a tight budget.</span></li>
+    <li><span><b>Make up for staying anonymous.</b> Trust comes from real people. Without names, give specific experience, one clear contact path, and a plain reason why names come on the call.</span></li>
+  </ol>
+
+  <h2>Best practices for a consulting firm website</h2>
+
+  <div class="practice">
+    <h3><span class="label research">Research</span>Most clients come from referrals. The website confirms you're credible.</h3>
+    <blockquote>"the most common way buyers find a new firm is by asking another person"<cite>Hinge Research Institute, survey of 822 buyers and 533 firms. <a href="https://hingemarketing.com/library/article/new_study_highlights_how_buyers_buy_professional_services" target="_blank" rel="noopener">Read the study</a>. Caveat: published 2013, and Hinge sells marketing services.</cite></blockquote>
+    <p>The same study found expertise and specialized skills were the most important factors when buyers chose a firm. A later Hinge study says over 80% of buyers check a firm's website (<a href="https://hingemarketing.com/library/article/finding-experts-why-and-how-clients-seek-visible-experts" target="_blank" rel="noopener">Finding Experts</a>; figure from a search excerpt, please verify).</p>
+    <p class="so"><b>For Treehouse:</b> someone sends a link to a nonprofit director. In 10 seconds the page must say who you help and what you do. Name the niche in the hero and the "Now accepting" band.</p>
+  </div>
+
+  <div class="practice">
+    <h3><span class="label research">Research</span>Show prices, or at least starting prices.</h3>
+    <blockquote>Business customers "report pricing as the top most needed piece of information online," and people see firms that show it "as being genuine and forthright."<cite>Nielsen Norman Group (NN/g), usability studies with business users. <a href="https://www.nngroup.com/articles/show-price/" target="_blank" rel="noopener">Pricing information gives B2B sites a competitive advantage</a>. Quoted from a search excerpt; please verify wording.</cite></blockquote>
+    <p class="so"><b>For Treehouse:</b> put "From $X" on the workshop, assessment and monthly partnership. The landing page has placeholders ready.</p>
+  </div>
+
+  <div class="practice">
+    <h3><span class="label research">Research</span>People trust organizations that show real people behind them.</h3>
+    <blockquote>"Show that honest and trustworthy people stand behind your site."<cite>Stanford Web Credibility Project, guideline 4, based on research with over 4,500 people. <a href="https://credibility.stanford.edu/guidelines/index.html" target="_blank" rel="noopener">Read the guidelines</a>.</cite></blockquote>
+    <p>NN/g's "About Us" research (100 sites tested, 65 more reviewed) found users look at company information to decide whether to trust an organization, and are skeptical of stock photos and corporate jargon (<a href="https://www.nngroup.com/articles/about-us-information-on-websites/" target="_blank" rel="noopener">NN/g article</a>).</p>
+    <p class="so"><b>For Treehouse:</b> staying anonymous has a real trust cost. The page offsets it with specific experience (sectors, years, team change), a plain "why no names" note, and a promise that names and LinkedIn profiles come on the call.</p>
+  </div>
+
+  <div class="practice">
+    <h3><span class="label research">Research</span>Write headings that people can scan.</h3>
+    <p>NN/g eye-tracking found people often read only headings and subheadings (the "layer-cake" pattern) and skip body text unless a heading matches what they want (<a href="https://www.nngroup.com/articles/layer-cake-pattern-scanning/" target="_blank" rel="noopener">NN/g layer-cake pattern</a>).</p>
+    <p class="so"><b>For Treehouse:</b> headings say what each section is ("Three problems we hear most", "Frequently asked questions"), not clever slogans.</p>
+  </div>
+
+  <div class="practice">
+    <h3><span class="label standard">Standard</span>Make it accessible and fast.</h3>
+    <p>Aim for WCAG 2.2 level AA: text contrast at least 4.5:1, tap targets at least 24×24 pixels, keyboard access and visible focus (<a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">W3C WCAG 2.2</a>). Aim for Google's "good" Core Web Vitals: main content loads within 2.5 seconds (<a href="https://web.dev/articles/defining-core-web-vitals-thresholds" target="_blank" rel="noopener">web.dev</a>). This matters even more for nonprofits, who often serve the public and have accessibility duties under Ontario's AODA.</p>
+  </div>
+
+  <div class="practice">
+    <h3><span class="label standard">Standard</span>Google and AI search need nothing special.</h3>
+    <blockquote>"There are no additional requirements to appear in AI Overviews or AI Mode"<cite>Google Search Central. <a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">AI features and your website</a>.</cite></blockquote>
+    <p class="so"><b>For Treehouse:</b> keep all content as real text, give the page a clear title and description, and add basic structured data. The landing page does all three. Be wary of paid "AI SEO" services; their claims are unproven.</p>
+  </div>
+
+  <div class="practice">
+    <h3><span class="label opinion">Opinion</span>One call to action, repeated with the same words.</h3>
+    <p>Every button says "Book a free intro call". Expert consensus, not a study: one clear next step reduces hesitation. An empty blog or a "Resources" page with nothing in it looks worse than none, so add one only when you'll keep writing.</p>
+  </div>
+
+  <h2>Competitive analysis: similar firms in Toronto</h2>
+  <p>I grouped competitors by what a buyer would compare you with. Descriptions come from search results about each firm; please check their sites before using any of this externally.</p>
+  <div class="scroll" role="region" aria-label="Competitor table" tabindex="0">
+    <table>
+      <thead><tr><th>Type</th><th>Examples</th><th>What they offer</th><th>How they show their people</th><th>Gap Treehouse can fill</th></tr></thead>
+      <tbody>
+        <tr><th>UX and service design agencies</th><td><a href="https://www.akendi.com/services/team-solutions/design-ops-consulting/" target="_blank" rel="noopener">Akendi</a>, <a href="https://www.bridgeable.com/" target="_blank" rel="noopener">Bridgeable</a></td><td>Research, product and service design. Akendi also sells DesignOps consulting, UX maturity assessments and training.</td><td>Established teams; Bridgeable has a team page.</td><td>They mostly do the work for you, with enterprise and government clients. You build the client team's own ability.</td></tr>
+        <tr><th>AI fluency and training</th><td><a href="https://actioninsight.ai/" target="_blank" rel="noopener">Action / Insight</a>, <a href="https://www.teamland.com/ai-training/toronto" target="_blank" rel="noopener">Teamland</a>, <a href="https://brainstation.io/workshops/ai-design/toronto" target="_blank" rel="noopener">BrainStation</a></td><td>AI training for leaders and teams. Action / Insight uses a "Play → Practice → Perform" approach.</td><td>Action / Insight names its two co-founders.</td><td>General AI skills for any role. Little on design teams, design operations, or what happens after the course.</td></tr>
+        <tr><th>Social-impact design studios</th><td><a href="https://weareloop.com/" target="_blank" rel="noopener">Loop</a>, <a href="https://thepublicstudio.ca/about" target="_blank" rel="noopener">The Public Studio</a>, <a href="http://coeffect.ca/" target="_blank" rel="noopener">Co-Effect</a></td><td>Branding, communications and digital work for nonprofits.</td><td>Values-led, community tone.</td><td>They share your audience but not your offer. No AI adoption or design-team operations.</td></tr>
+        <tr><th>Fractional design leadership</th><td><a href="https://outwitly.com/services/fractional-design-leadership/" target="_blank" rel="noopener">Outwitly</a> (Ottawa)</td><td>Part-time design leaders, 20–40 hours a month, 3-month minimum. Also AI upskilling for design teams.</td><td>Team page.</td><td>Closest to you in offer, but a staffing model, and not focused on nonprofits.</td></tr>
+        <tr class="us"><th>Treehouse</th><td>You</td><td>Design vision, design operations, AI workflows and AI guardrails, for nonprofits and AI-for-good teams.</td><td>Anonymous for now.</td><td>The only one combining design leadership and AI adoption for this niche (based on what I found).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How Treehouse can stand out</h2>
+  <ol>
+    <li><b>Niche plus offer.</b> Plenty of firms do AI training. Plenty serve nonprofits. None I found help nonprofit design teams adopt AI and keep it working. Say this plainly. <span class="label research">Research</span> backs specialization (Hinge).</li>
+    <li><b>"We leave your team stronger."</b> Against agencies, your promise is capability, not deliverables. The comparison table on the landing page makes this concrete. <span class="label opinion">Opinion</span></li>
+    <li><b>Transparent starting prices.</b> Few consultancies show them. <span class="label research">Research</span> says buyers want them (NN/g).</li>
+    <li><b>A low-risk first step.</b> A fixed 1-day workshop is easier to approve than a multi-month contract, especially on a nonprofit budget. <span class="label opinion">Opinion</span></li>
+    <li><b>Responsible AI as a feature.</b> Nonprofits handle sensitive data and public trust. Your "AI operations that last" service (guardrails, privacy and bias checks) speaks to that worry directly. <span class="label opinion">Opinion</span></li>
+    <li><b>Proof as soon as you have it.</b> One anonymized case study ("a Toronto health nonprofit with a 6-person design team") with a real result will do more than any other change. Only publish with the client's permission.</li>
+  </ol>
+
+  <h2>Your names and your day jobs</h2>
+  <p>This is general information, not legal advice. Book a one-hour call with an Ontario employment lawyer before your first paid client.</p>
+  <h3>What the law says</h3>
+  <ul>
+    <li>Canadian law doesn't ban side work. It becomes a problem when it breaks your contract or code of conduct, or creates a conflict of interest, for example working for your employer's competitor or for someone your employer does business with (<a href="https://www.bennettjones.com/Insights/Blogs/Dont-Lose-Your-Day-Job-Court-Rules-Against-Moonlighting-Employee" target="_blank" rel="noopener">Bennett Jones</a>, <a href="https://leglobal.law/2025/09/23/canada-performing-other-work-on-company-time-how-employers-can-protect-against-moonlighting/" target="_blank" rel="noopener">L&amp;E Global</a>).</li>
+    <li>If your employer's policy requires you to disclose conflicts and you don't, the employer may be able to fire you for cause, without severance.</li>
+    <li>In <i>Atkins v. Windsor Star</i>, an Ontario court sided with an employee because the employer had no clear moonlighting policy: <q>It was incumbent upon the employer to spell out, in language easily understood, exactly what its views and expectations were</q> (<a href="https://www.hrreporter.com/opinion/employment-law/looking-out-for-no-1/382916" target="_blank" rel="noopener">HR Reporter</a>). So your own written policies matter a lot.</li>
+    <li>Ontario banned most employee non-compete clauses in 2021, but confidentiality, non-solicitation and intellectual property clauses still apply (<a href="https://mcmillan.ca/insights/ontario-passes-the-working-for-workers-act-2021/" target="_blank" rel="noopener">McMillan LLP</a>). Executives can still be bound by non-competes.</li>
+  </ul>
+  <h3>Checklist for each co-founder</h3>
+  <ul class="check">
+    <li>Read your employment contract, code of conduct and any outside-work or conflict-of-interest policy.</li>
+    <li>Don't take clients who compete with, buy from, or sell to your employer.</li>
+    <li>Never use your employer's time, laptop, accounts, templates or confidential information for Treehouse.</li>
+    <li>Check who owns what you create. Some contracts claim ideas made outside work hours.</li>
+    <li>If your policy asks for disclosure, disclose in writing and get written approval. That is also the path to putting your names on the site.</li>
+    <li>Use Treehouse-only accounts: a domain email, a booking link and a LinkedIn company page. Don't link personal profiles yet.</li>
+  </ul>
+  <h3>What the landing page does about it</h3>
+  <p>Founders appear as "two co-founders" with real experience but no names or photos. A short note explains that names and LinkedIn profiles are shared on the intro call. When you're cleared, swap the experience card for two named bios with photos; trust research says that will help.</p>
+
+  <h2>What I still need from you</h2>
+  <ul>
+    <li>Starting prices for the workshop, assessment and monthly partnership.</li>
+    <li>Your domain, a Treehouse email address, and a booking link (for example Cal.com or Calendly).</li>
+    <li>Confirm the drafted details: 30-minute intro call, 2-business-day reply time, remote and in-person workshops, and the "For" and "You get" lines on each service.</li>
+    <li>Any real client result or quote you have permission to share.</li>
+    <li>Your personal site couldn't be reached from this environment, so bios use only what's on the poster. Paste anything you'd like added.</li>
+  </ul>
+
+  <h2>Sources</h2>
+  <ul class="sources">
+    <li>Hinge Research Institute, <a href="https://hingemarketing.com/library/article/new_study_highlights_how_buyers_buy_professional_services" target="_blank" rel="noopener">How Buyers Buy Professional Services</a> and <a href="https://hingemarketing.com/library/article/finding-experts-why-and-how-clients-seek-visible-experts" target="_blank" rel="noopener">Finding Experts</a></li>
+    <li>Nielsen Norman Group, <a href="https://www.nngroup.com/articles/show-price/" target="_blank" rel="noopener">Pricing information on B2B sites</a>, <a href="https://www.nngroup.com/articles/about-us-information-on-websites/" target="_blank" rel="noopener">About Us information</a>, <a href="https://www.nngroup.com/articles/layer-cake-pattern-scanning/" target="_blank" rel="noopener">Layer-cake scanning</a></li>
+    <li>Stanford Web Credibility Project, <a href="https://credibility.stanford.edu/guidelines/index.html" target="_blank" rel="noopener">Guidelines</a></li>
+    <li>W3C, <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener">WCAG 2.2</a>; Google, <a href="https://web.dev/articles/defining-core-web-vitals-thresholds" target="_blank" rel="noopener">Core Web Vitals thresholds</a> and <a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">AI features</a></li>
+    <li>Employment law: <a href="https://www.bennettjones.com/Insights/Blogs/Dont-Lose-Your-Day-Job-Court-Rules-Against-Moonlighting-Employee" target="_blank" rel="noopener">Bennett Jones</a>, <a href="https://www.hrreporter.com/opinion/employment-law/looking-out-for-no-1/382916" target="_blank" rel="noopener">HR Reporter</a>, <a href="https://leglobal.law/2025/09/23/canada-performing-other-work-on-company-time-how-employers-can-protect-against-moonlighting/" target="_blank" rel="noopener">L&amp;E Global</a>, <a href="https://mcmillan.ca/insights/ontario-passes-the-working-for-workers-act-2021/" target="_blank" rel="noopener">McMillan LLP</a></li>
+  </ul>
+</main>
