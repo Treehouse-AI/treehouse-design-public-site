@@ -73,7 +73,7 @@ body {
 }
 h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; }
-.logo, .eb, .pill, .btn, .only p, .step .len, .service dt, thead th { font-family: var(--font-display); }
+.logo, .eb, .pill, .btn, .step .len, .service dt, thead th { font-family: var(--font-display); }
 ul { padding: 0; list-style: none; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
@@ -108,6 +108,7 @@ a { color: inherit; }
 .section-head { display: grid; gap: 12px; max-width: 760px; }
 .section-head h2 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1.02; letter-spacing: -0.035em; }
 .section-head p { color: var(--graphite); font-size: 19px; max-width: 62ch; }
+.price-hl { color: var(--ink); font-weight: 600; }
 
 /* Header: sits over the dark hero */
 /* Hidden over the hero; slides in as a fixed bar once the hero has scrolled out of view.
@@ -195,12 +196,6 @@ a { color: inherit; }
   .headline > * { transition: none; }
 }
 
-/* Now accepting band */
-.only { background: var(--ink); color: var(--white); }
-.only .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; padding-block: 26px; }
-.only .tag { background: var(--lime); color: var(--ink); padding: 6px 16px; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
-.only p { font-size: clamp(22px, 3vw, 34px); line-height: 1.15; font-weight: 500; letter-spacing: -0.025em; }
-.only em { font-style: normal; color: var(--lime); }
 
 /* Problems */
 .problems { margin-top: 44px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -363,13 +358,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
     <button class="motion-toggle" type="button" aria-pressed="false"><span class="ico" aria-hidden="true"></span><span class="lbl">Pause motion</span></button>
   </section>
 
-  <section class="only" aria-label="Who we're taking on">
-    <div class="wrap">
-      <span class="pill tag">Now accepting</span>
-      <p>Clients who are <em>nonprofits</em> or <em>using AI for good.</em></p>
-    </div>
-  </section>
-
   <section class="section" aria-labelledby="problems-title">
     <div class="wrap">
       <div class="section-head">
@@ -446,7 +434,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
       <div class="section-head">
         <span class="eb">How we work</span>
         <h2 id="approach-title">Built around your team, <span class="hl">not a template.</span></h2>
-        <p>We learn your team's size, tools, culture and the rules your sector works under. Every step is fitted to that, and so is the price, which we set together after a free intro call. Most teams start with the workshop, and you can stop after any step.</p>
+        <p>We learn your team's size, tools, culture and the rules your sector works under. Every step is fitted to that, and so is the price, which we set together after a free intro call. <strong class="price-hl"><span class="hl">Nonprofits and AI-for-good start-ups get our lowest rates.</span></strong> Most teams start with the workshop, and you can stop after any step.</p>
       </div>
       <div class="context">
         <span class="eb">We fit every step to</span>
@@ -543,7 +531,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
         </details>
         <details>
           <summary>What does it cost?</summary>
-          <p>We set the price after a free intro call, once we understand your team, goals and budget. You get a written quote before any work starts, and there is no cost to talk.</p>
+          <p>We set the price after a free intro call, once we understand your team, goals and budget. Nonprofits and AI-for-good start-ups get our lowest rates. You get a written quote before any work starts, and there is no cost to talk.</p>
         </details>
         <details>
           <summary>Who do you work with?</summary>
