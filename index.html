@@ -15,7 +15,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Crect width='38' height='38' rx='10' fill='%23beff50'/%3E%3Cpath d='M19 6 8 18h6l-4 6h18l-4-6h6L19 6Z M19 24v8' fill='none' stroke='%2314140f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500&display=swap">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -50,7 +50,8 @@
   --parch: #f5f5eb;
   --white: #ffffff;
 
-  --font: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; /* headings, logo, labels, buttons */
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; /* all body content */
   --gutter: clamp(16px, 5vw, 72px);
   --max: 1200px;
   --radius: 28px;
@@ -70,7 +71,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
-h1, h2, h3 { font-weight: 500; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; }
+.logo, .eb, .pill, .btn, .only p, .step .len, .service dt, thead th { font-family: var(--font-display); }
 ul { padding: 0; list-style: none; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
@@ -92,7 +94,7 @@ a { color: inherit; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   min-height: 48px; padding: 12px 26px; border-radius: 999px;
-  font: 500 17px/1.2 var(--font); text-decoration: none; border: 2px solid var(--ink);
+  font: 500 17px/1.2 var(--font-display); text-decoration: none; border: 2px solid var(--ink);
   transition: transform .15s ease;
 }
 .btn-dark { background: var(--ink); color: var(--white); }
