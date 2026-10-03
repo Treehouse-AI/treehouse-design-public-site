@@ -146,11 +146,15 @@ a { color: inherit; }
 /* Services */
 .services { background: var(--parch); }
 .service-grid { margin-top: 44px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
-.service { background: var(--white); border-radius: var(--radius); padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-.service .tag { align-self: flex-start; background: var(--lime); padding: 4px 14px; font-size: 14px; }
+/* Each card spans 5 rows of the parent grid (tag, title, summary, For, You get) via subgrid,
+   so the same parts line up across cards in a row even when text wraps differently. */
+.service { background: var(--white); border-radius: var(--radius); padding: clamp(24px, 3vw, 36px); display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 14px; align-content: start; min-width: 0; }
+.service .tag { justify-self: start; align-self: start; background: var(--lime); padding: 4px 14px; font-size: 14px; }
 .service h3 { font-size: clamp(26px, 2.8vw, 34px); line-height: 1.05; letter-spacing: -0.03em; }
 .service .sum { font-size: 19px; color: var(--char); }
-.service dl { display: grid; gap: 12px; padding-top: 16px; border-top: 2px solid var(--ash); margin-top: auto; }
+.service dl { display: contents; }
+.service dl > div:first-child { border-top: 2px solid var(--ash); padding-top: 16px; }
+.service dd { margin-top: 4px; }
 .service dt { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
 .service dd { color: var(--char); }
 .service dd ul { display: grid; gap: 6px; }
