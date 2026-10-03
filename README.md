@@ -13,7 +13,6 @@ Landing page for Treehouse, a design & AI studio in Toronto.
 | `example.com` (domain) | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` |
 | `hello@example.com` | `index.html` (contact section, JSON-LD) |
 | `https://cal.com/REPLACE-WITH-BOOKING-LINK` | `index.html` contact button |
-| `[add price]` (3 places) | `index.html`, "How we work" |
 
 ## Drafted details to confirm
 
@@ -22,7 +21,7 @@ These were written from the poster and are not yet confirmed:
 - 30-minute intro call; reply within 2 business days
 - Workshops in person (Toronto area) or remote
 - The "For" and "You get" lines on each service card
-- "We send a fixed quote after the intro call"
+- Pricing is set after the intro call, with a written quote before work starts (no public prices yet). Add starting prices to the "How we work" cards when you have them.
 
 ## Founder names
 
