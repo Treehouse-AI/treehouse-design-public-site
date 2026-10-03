@@ -60,7 +60,10 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
+html { -webkit-text-size-adjust: 100%; }
+/* Leave room for the fixed header when jumping to a section. scroll-margin sits on the
+   target itself, so it also works when the page is scrolled inside an embedded frame. */
+main section[id]:not(.hero) { scroll-margin-top: calc(88px + env(safe-area-inset-top, 0px)); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   margin: 0;
