@@ -11,8 +11,9 @@
 <meta property="og:description" content="We make your team work better with AI. Design vision, design operations and AI workflows for nonprofits and AI-for-good teams.">
 <meta property="og:url" content="https://example.com/">
 <meta property="og:locale" content="en_CA">
-<meta name="theme-color" content="#beff50">
+<meta name="theme-color" content="#14140f">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Crect width='38' height='38' rx='10' fill='%23beff50'/%3E%3Cpath d='M19 6 8 18h6l-4 6h18l-4-6h6L19 6Z M19 24v8' fill='none' stroke='%2314140f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('th-intro')){document.documentElement.classList.add('intro-on');sessionStorage.setItem('th-intro','1')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500&display=swap">
@@ -108,26 +109,82 @@ a { color: inherit; }
 .section-head h2 { font-size: clamp(32px, 4.6vw, 52px); line-height: 1.02; letter-spacing: -0.035em; }
 .section-head p { color: var(--graphite); font-size: 19px; max-width: 62ch; }
 
-/* Header */
-.site-header { padding-block: 20px; }
+/* Header: sits over the dark hero */
+.site-header { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding-block: 20px; color: var(--white); }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .logo { display: inline-flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 500; letter-spacing: -0.03em; text-decoration: none; }
 .logo .m { width: 40px; height: 40px; border-radius: 12px; background: var(--lime); display: grid; place-items: center; flex: none; }
 .nav { display: flex; align-items: center; gap: 28px; }
-.nav a:not(.btn) { text-decoration: none; font-size: 16px; color: var(--char); padding-block: 8px; }
-.nav a:not(.btn):hover { text-decoration: underline; text-underline-offset: 4px; }
+.nav a:not(.btn) { text-decoration: none; font-size: 16px; color: #e4e4da; padding-block: 8px; }
+.nav a:not(.btn):hover { color: var(--white); text-decoration: underline; text-underline-offset: 4px; }
 .nav .btn { white-space: nowrap; }
 @media (max-width: 760px) { .nav a:not(.btn) { display: none; } .nav .btn { padding-inline: 16px; font-size: 15px; } }
+.btn-lime { background: var(--lime); color: var(--ink); border-color: var(--lime); }
+.btn-lime:hover { transform: translateY(-1px); }
+.btn-outline-light { background: transparent; color: var(--white); border-color: rgba(255,255,255,.55); }
+.btn-outline-light:hover { background: rgba(255,255,255,.08); border-color: var(--white); }
+.site-header :focus-visible, .hero :focus-visible { outline-color: var(--lime); }
 
-/* Hero */
-.hero { padding-block: clamp(32px, 6vw, 72px) clamp(48px, 7vw, 88px); }
-.chip { background: var(--parch); padding: 8px 16px; font-size: 15px; }
-.chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); }
-.hero h1 { margin-top: 24px; font-size: clamp(44px, 8.6vw, 112px); line-height: .96; letter-spacing: -0.045em; max-width: 13ch; }
-.lede { margin-top: 28px; max-width: 46ch; font-size: clamp(19px, 2.1vw, 24px); line-height: 1.4; color: var(--graphite); }
-.lede b { color: var(--ink); font-weight: 500; }
-.hero-actions { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
-.hero-note { font-size: 15px; color: var(--graphite); }
+/* Hero: full-screen dark stage with a WebGL glow (canvas) behind the content.
+   The CSS gradients below are the fallback when WebGL is unavailable. */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: max(620px, 100svh); display: grid; place-items: center;
+  padding-block: 120px 170px; color: var(--white); text-align: center;
+  background:
+    radial-gradient(60% 55% at 80% 15%, rgba(130,165,60,.45), transparent 70%),
+    radial-gradient(50% 50% at 15% 60%, rgba(70,60,140,.40), transparent 70%),
+    radial-gradient(45% 45% at 60% 85%, rgba(25,110,100,.35), transparent 70%),
+    var(--ink);
+}
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+.hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 160px; z-index: -1; background: linear-gradient(transparent, var(--ink)); pointer-events: none; }
+.hero-content { position: relative; display: grid; justify-items: center; gap: 0; }
+.hero-content::before { content: ''; position: absolute; inset: -14% -12%; z-index: -1; background: radial-gradient(closest-side, rgba(20,20,15,.62), rgba(20,20,15,0)); pointer-events: none; }
+.chip { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); color: var(--white); padding: 8px 16px; font-size: 15px; }
+.chip i { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); }
+.headline { display: grid; margin-top: 26px; }
+.headline > * { grid-area: 1 / 1; align-self: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 7.4vw, 100px); line-height: .98; letter-spacing: -0.045em; max-width: 15ch; margin-inline: auto; text-wrap: balance;
+  transition: opacity .9s ease, filter .9s ease, transform .9s ease; }
+.headline .fr { font-size: clamp(34px, 6.2vw, 84px); max-width: 17ch; opacity: 0; filter: blur(12px); transform: translateY(8px); }
+.headline.show-fr .en { opacity: 0; filter: blur(12px); transform: translateY(-8px); }
+.headline.show-fr .fr { opacity: 1; filter: none; transform: none; }
+.hero .hl { color: var(--ink); }
+.lede { margin-top: 28px; max-width: 50ch; font-size: clamp(18px, 1.9vw, 22px); line-height: 1.45; color: #dcdcd2; }
+.lede b { color: var(--white); font-weight: 500; }
+.hero-actions { margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 16px; }
+
+/* Spinning scroll badge */
+.scroll-badge { position: absolute; left: 50%; bottom: 36px; width: 108px; height: 108px; margin-left: -54px; display: grid; place-items: center; color: var(--white); text-decoration: none; border-radius: 50%; }
+.scroll-badge svg.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 16s linear infinite; }
+.scroll-badge text { font: 500 10.5px var(--font-display); letter-spacing: .32em; fill: currentColor; text-transform: uppercase; }
+.scroll-badge .core { width: 40px; height: 40px; border-radius: 12px; background: var(--lime); display: grid; place-items: center; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Pause control (WCAG 2.2.2) */
+.motion-toggle { position: absolute; right: var(--gutter); bottom: 32px; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: rgba(20,20,15,.5); color: #e4e4da; font: 500 13px var(--font-display); cursor: pointer; }
+.motion-toggle:hover { color: var(--white); border-color: rgba(255,255,255,.6); }
+.motion-toggle .ico { width: 10px; height: 10px; display: inline-block; border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.motion-paused .motion-toggle .ico { border: 0; border-left: 9px solid currentColor; border-top: 5px solid transparent; border-bottom: 5px solid transparent; width: 0; height: 0; }
+@media (max-width: 600px) { .motion-toggle { padding: 0; width: 40px; height: 40px; justify-content: center; } .motion-toggle .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+.motion-paused .scroll-badge svg.ring { animation-play-state: paused; }
+
+/* Intro ("hello toronto"): first visit per session only */
+.intro { display: none; }
+.intro-on .intro { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--ink); color: var(--white); cursor: pointer; transition: opacity .8s ease; }
+.intro .glow { position: absolute; width: 180px; height: 260px; border-radius: 50%; filter: blur(34px); opacity: .9;
+  background: radial-gradient(closest-side, rgba(170,215,90,.85), rgba(40,140,125,.55) 60%, rgba(90,75,170,.0)); transform: rotate(-24deg);
+  transition: transform 1s cubic-bezier(.7,0,.3,1), opacity 1s ease; animation: breathe 2.4s ease-in-out infinite alternate; }
+.intro p { position: relative; font: 400 clamp(22px, 3vw, 30px) var(--font-display); letter-spacing: -0.02em; transition: opacity .5s ease, filter .5s ease; }
+.intro.out { opacity: 0; pointer-events: none; }
+.intro.out .glow { transform: rotate(-24deg) scale(9); opacity: 0; }
+.intro.out p { opacity: 0; filter: blur(8px); }
+@keyframes breathe { to { transform: rotate(-18deg) scale(1.12); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-badge svg.ring { animation: none; }
+  .headline > * { transition: none; }
+}
 
 /* Now accepting band */
 .only { background: var(--ink); color: var(--white); }
@@ -257,6 +314,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 </style>
 </head>
 <body>
+<div class="intro" aria-hidden="true"><span class="glow"></span><p>hello toronto</p></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header">
@@ -270,22 +328,31 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
       <a href="#approach">How we work</a>
       <a href="#team">Who we are</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn-dark" href="#contact">Book an intro call</a>
+      <a class="btn btn-lime" href="#contact">Book an intro call</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
   <section class="hero" id="top" aria-labelledby="hero-title">
-    <div class="wrap">
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="wrap hero-content">
       <span class="pill chip"><i aria-hidden="true"></i>Design &amp; AI studio · Toronto</span>
-      <h1 id="hero-title">We make your team work <span class="hl">better with&nbsp;AI.</span></h1>
+      <div class="headline">
+        <h1 id="hero-title" class="en">We make your team work <span class="hl">better with&nbsp;AI.</span></h1>
+        <p class="fr" lang="fr" aria-hidden="true">Nous aidons votre équipe à mieux travailler <span class="hl">avec l’IA.</span></p>
+      </div>
       <p class="lede">We don't build your product. We help your team <b>set a design vision, scale how design works, and adopt AI workflows</b> that fit your size and culture.</p>
       <div class="hero-actions">
-        <a class="btn btn-dark" href="#contact">Book a free intro call</a>
-        <a class="btn btn-ghost" href="#approach">See how we work</a>
+        <a class="btn btn-lime" href="#contact">Book a free intro call</a>
+        <a class="btn btn-outline-light" href="#approach">See how we work</a>
       </div>
     </div>
+    <a class="scroll-badge" href="#services" aria-label="Scroll to services">
+      <svg class="ring" viewBox="0 0 108 108" aria-hidden="true"><defs><path id="badge-circle" d="M54,54 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"/></defs><text><textPath href="#badge-circle" textLength="248" lengthAdjust="spacing">Scroll down · Scroll down ·</textPath></text></svg>
+      <span class="core"><svg width="22" height="22" viewBox="0 0 38 38" fill="none" stroke="#14140f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 4 6 18h7l-5 7h22l-5-7h7L19 4Z"/><path d="M19 25v9"/></svg></span>
+    </a>
+    <button class="motion-toggle" type="button" aria-pressed="false"><span class="ico" aria-hidden="true"></span><span class="lbl">Pause motion</span></button>
   </section>
 
   <section class="only" aria-label="Who we're taking on">
@@ -509,5 +576,144 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
     <span>© 2026 Treehouse</span>
   </div>
 </footer>
+<script>
+(() => {
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.hero');
+  const headline = document.querySelector('.headline');
+  const toggle = document.querySelector('.motion-toggle');
+  let paused = reduce;
+
+  /* Intro: shown only when the <head> script set .intro-on */
+  const intro = document.querySelector('.intro');
+  if (root.classList.contains('intro-on')) {
+    const end = () => {
+      if (intro.classList.contains('out')) return;
+      intro.classList.add('out');
+      setTimeout(() => root.classList.remove('intro-on'), 900);
+    };
+    intro.addEventListener('click', end);
+    setTimeout(end, 1300);
+  }
+
+  /* Headline: English <-> French */
+  let swap = null;
+  const startSwap = () => { if (!swap) swap = setInterval(() => headline.classList.toggle('show-fr'), 4500); };
+  const stopSwap = () => { clearInterval(swap); swap = null; headline.classList.remove('show-fr'); };
+
+  /* Pause control */
+  const setPaused = (v) => {
+    paused = v;
+    root.classList.toggle('motion-paused', v);
+    toggle.setAttribute('aria-pressed', String(v));
+    toggle.querySelector('.lbl').textContent = v ? 'Play motion' : 'Pause motion';
+    v ? stopSwap() : startSwap();
+    if (!v) requestFrame();
+  };
+  toggle.addEventListener('click', () => setPaused(!paused));
+
+  /* WebGL glow */
+  const canvas = document.querySelector('.hero-canvas');
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });
+  let requestFrame = () => {};
+  if (!gl) { canvas.remove(); }
+  else {
+    const vs = 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+    const fs = `precision mediump float;
+uniform vec2 r;uniform float t;uniform vec2 m;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}
+void main(){
+  vec2 uv=gl_FragCoord.xy/r; float asp=r.x/r.y; vec2 p=vec2(uv.x*asp,uv.y);
+  vec2 mm=m-.5; float tt=t*.07;
+  vec3 ink=vec3(.078,.078,.059);
+  vec3 lime=vec3(.50,.64,.22), teal=vec3(.09,.44,.40), vio=vec3(.36,.29,.64);
+  float big=max(asp,.8);
+  float R=.62*big+.03*sin(tt*2.1);
+  vec2 S=vec2(asp*.5+.42*big+.05*sin(tt*1.3),.80+.05*cos(tt))+mm*vec2(.12,.10);
+  vec2 q=p-S; float d=length(q);
+  vec2 w=p*1.3+vec2(fbm(p*1.1+tt),fbm(p*1.1-tt+3.7));
+  float f=fbm(w+tt*.6);
+  vec3 col=ink;
+  float glow=exp(-max(d-R,0.)*2.2);
+  col+=mix(vio,teal,smoothstep(.35,.75,f))*glow*.55*(.55+.45*f);
+  col+=vio*.10*smoothstep(.9,.1,uv.y)*f;
+  float inside=smoothstep(R+.002,R-.002,d);
+  float k=clamp(d/R,0.,1.);
+  vec2 L=normalize(vec2(-.65,-.45)+mm*1.2);
+  float lit=clamp(dot(q/max(d,1e-4),L)*.5+.5,0.,1.);
+  vec3 sc=mix(teal*.7,lime,smoothstep(.35,.95,lit*.8+f*.35));
+  sc*=.07+.85*pow(k,3.)*lit*lit+.12*f*(1.-k*.5);
+  sc*=1.-.55*smoothstep(.985,1.,k)*(1.-lit);
+  col=mix(col,sc,inside);
+  float rim=exp(-abs(d-R)*220.)*(.2+.8*lit);
+  col+=vec3(.86,.96,.72)*rim*.6;
+  col=mix(vec3(dot(col,vec3(.333))),col,.82);
+  col*=1.-.38*length(uv-vec2(.5,.45));
+  col+=(h(gl_FragCoord.xy+fract(t*.37)*91.)-.5)*.045;
+  gl_FragColor=vec4(col,1.);
+}`;
+    const sh = (type, src) => { const o = gl.createShader(type); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { canvas.remove(); }
+    else {
+      gl.useProgram(prog);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'a');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const uR = gl.getUniformLocation(prog, 'r'), uT = gl.getUniformLocation(prog, 't'), uM = gl.getUniformLocation(prog, 'm');
+
+      const scale = Math.min(window.devicePixelRatio || 1, 1.5) * 0.6;
+      const resize = () => {
+        const w = Math.max(1, Math.round(canvas.clientWidth * scale)), h = Math.max(1, Math.round(canvas.clientHeight * scale));
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); }
+      };
+
+      /* Pointer: mouse on desktop, finger on touch; drifts back when idle */
+      const ptr = { x: .5, y: .5 }, target = { x: .5, y: .5 };
+      let lastMove = -1e9;
+      const onMove = (e) => {
+        const b = hero.getBoundingClientRect();
+        target.x = (e.clientX - b.left) / b.width;
+        target.y = 1 - (e.clientY - b.top) / b.height;
+        lastMove = performance.now();
+      };
+      hero.addEventListener('pointermove', onMove, { passive: true });
+      hero.addEventListener('pointerdown', onMove, { passive: true });
+
+      let visible = true, raf = 0, last = performance.now(), clock = 0;
+      const frame = (now) => {
+        raf = 0;
+        const dt = Math.min(now - last, 100); last = now;
+        if (!paused) clock += dt / 1000;
+        if (now - lastMove > 3000) { target.x = .5 + .18 * Math.sin(clock * .23); target.y = .5 + .14 * Math.cos(clock * .19); }
+        ptr.x += (target.x - ptr.x) * .04; ptr.y += (target.y - ptr.y) * .04;
+        resize();
+        gl.uniform2f(uR, canvas.width, canvas.height);
+        gl.uniform1f(uT, clock);
+        gl.uniform2f(uM, ptr.x, ptr.y);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        if (!paused && visible && !document.hidden) raf = requestAnimationFrame(frame);
+      };
+      requestFrame = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) requestFrame(); }).observe(hero);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) requestFrame(); });
+      addEventListener('resize', requestFrame);
+      requestFrame();
+    }
+  }
+
+  if (reduce) { setPaused(true); toggle.hidden = true; }
+  else startSwap();
+})();
+</script>
 </body>
 </html>
