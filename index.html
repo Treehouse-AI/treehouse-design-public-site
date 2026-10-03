@@ -156,28 +156,46 @@ a { color: inherit; }
 .service dd li::before { content: ''; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
 @media (max-width: 860px) { .service-grid { grid-template-columns: 1fr; } }
 
-/* Approach: a real sequence, so it is drawn as one */
-.steps { list-style: none; padding: 0; margin-top: 52px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; counter-reset: step; }
-.step { position: relative; padding-top: 48px; min-width: 0; }
-.step::before { content: ''; position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--white); border: 3px solid var(--ink); }
-.step::after { content: ''; position: absolute; left: 28px; right: -32px; top: 12px; height: 3px; background: var(--ink); }
-.step:last-child::after { right: 0; background: linear-gradient(90deg, var(--ink), transparent); }
-.step.start::before { background: var(--lime); }
-.step .len { font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite); }
-.step h3 { margin-top: 6px; font-size: 30px; letter-spacing: -0.025em; }
-.step .what { margin-top: 6px; font-size: 19px; color: var(--char); }
-.step ul { margin-top: 16px; display: grid; gap: 6px; color: var(--graphite); }
-.step li { padding-left: 18px; position: relative; }
-.step li::before { content: '→'; position: absolute; left: 0; }
-.price { margin-top: 20px; display: inline-flex; background: var(--parch); padding: 8px 16px; font-size: 15px; }
+/* Approach: the client's context feeds a 3-step staircase that rises with commitment */
+.context { margin-top: 40px; position: relative; background: var(--parch); border-radius: var(--radius); padding: 22px 24px 24px; display: grid; gap: 14px; }
+.context .eb { flex: none; color: var(--char); }
+.context ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.context li { display: flex; align-items: flex-start; gap: 12px; background: var(--white); border-radius: 18px; padding: 14px; font-size: 16px; font-weight: 500; line-height: 1.3; min-width: 0; }
+.context li small { display: block; margin-top: 3px; font-size: 14px; font-weight: 400; color: var(--graphite); }
+.context .ic { width: 40px; height: 40px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; flex: none; }
+.context::after { content: ''; position: absolute; left: 50%; bottom: -36px; width: 3px; height: 36px; background: var(--ink); transform: translateX(-50%); }
+
+.steps { list-style: none; padding: 0; margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.step { position: relative; min-width: 0; border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.step:nth-child(1) { margin-top: 64px; background: var(--white); border: 2px solid var(--ink); }
+.step:nth-child(2) { margin-top: 32px; background: var(--parch); }
+.step:nth-child(3) { background: var(--ink); color: var(--white); }
+.step + .step::before {
+  content: '→'; position: absolute; left: -32px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%; background: var(--lime); color: var(--ink); border: 3px solid var(--white);
+  display: grid; place-items: center; font-size: 18px; font-weight: 500; z-index: 1;
+}
+.step-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.step .icon { width: 56px; height: 56px; border-radius: 18px; background: var(--lime); display: grid; place-items: center; flex: none; }
+.step .len { background: var(--parch); padding: 6px 14px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+.step:nth-child(2) .len { background: var(--white); }
+.step:nth-child(3) .len { background: #2a2a24; color: var(--lime); }
+.step .first { align-self: flex-start; background: var(--lime); padding: 4px 12px; font-size: 13px; }
+.step h3 { font-size: 30px; line-height: 1.05; letter-spacing: -0.03em; }
+.step .what { font-size: 19px; color: var(--char); }
+.step:nth-child(3) .what { color: var(--white); }
+.step ul { display: grid; gap: 8px; color: var(--graphite); }
+.step:nth-child(3) ul { color: #c9c9bd; }
+.step ul li { padding-left: 30px; position: relative; }
+.step ul li::before { content: '✓'; position: absolute; left: 0; top: .15em; width: 20px; height: 20px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+.price { margin-top: auto; padding-top: 16px; border-top: 2px solid var(--ash); font-size: 17px; font-weight: 500; }
+.step:nth-child(3) .price { border-color: #3a3a33; }
 .placeholder { background: #fff3b0; color: var(--ink); border-radius: 4px; padding: 0 4px; }
-.steps-note { margin-top: 36px; color: var(--graphite); }
 @media (max-width: 860px) {
-  .steps { grid-template-columns: 1fr; gap: 0; }
-  .step { padding-top: 0; padding-left: 48px; padding-bottom: 36px; }
-  .step::after { left: 12px; right: auto; top: 28px; bottom: 0; width: 3px; height: auto; }
-  .step:last-child { padding-bottom: 0; }
-  .step:last-child::after { display: none; }
+  .steps { grid-template-columns: 1fr; gap: 36px; }
+  .step:nth-child(n) { margin-top: 0; }
+  .step + .step::before { content: '↓'; left: 50%; top: -38px; transform: translateX(-50%); }
+  .context ul { grid-template-columns: 1fr; }
 }
 
 /* Comparison */
@@ -348,30 +366,40 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
     <div class="wrap">
       <div class="section-head">
         <span class="eb">How we work</span>
-        <h2 id="approach-title">Start small. Go further if it's working.</h2>
-        <p>Most clients start with the workshop. You can stop after any step.</p>
+        <h2 id="approach-title">Built around your team, <span class="hl">not a template.</span></h2>
+        <p>We learn your team's size, tools, culture and the rules your sector works under. Every step is fitted to that. Most teams start with the workshop, and you can stop after any step.</p>
+      </div>
+      <div class="context">
+        <span class="eb">We fit every step to</span>
+        <ul>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 19c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14c2.8.2 4.5 1.9 4.5 5"/></svg></span><span>Team size &amp; structure<small>who does what, and how many</small></span></li>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span><span>Tools you already use<small>design, docs and AI tools</small></span></li>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h13a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H10l-4 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></span><span>Culture &amp; ways of working<small>how decisions get made</small></span></li>
+          <li><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></span><span>Sector rules<small>privacy, funding, public trust</small></span></li>
+        </ul>
       </div>
       <ol class="steps">
-        <li class="step start">
-          <span class="len">1 day</span>
+        <li class="step">
+          <div class="step-top"><span class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="2"/><rect x="11" y="11" width="10" height="10" rx="2" fill="#beff50"/><path d="M14 15h4M14 18h2"/></svg></span><span class="pill len">1 day</span></div>
+          <span class="pill first">Most teams start here</span>
           <h3>Workshop</h3>
           <p class="what">Find where AI fits.</p>
           <ul><li>Your team, your real work</li><li>A shortlist of where to start</li></ul>
-          <span class="pill price">From <span class="placeholder">[add price]</span></span>
+          <p class="price">From <span class="placeholder">[add price]</span></p>
         </li>
         <li class="step">
-          <span class="len">2–3 weeks</span>
+          <div class="step-top"><span class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17a9 9 0 0 1 18 0"/><path d="M12 17l4.5-5.5"/><circle cx="12" cy="17" r="1.6" fill="#14140f"/><path d="M6.5 13.5l1 .8M12 8v1.3M17.5 13.5l-1 .8"/></svg></span><span class="pill len">2–3 weeks</span></div>
           <h3>Assessment</h3>
           <p class="what">A maturity review and plan.</p>
           <ul><li>How design and AI work today</li><li>A prioritized plan with owners</li></ul>
-          <span class="pill price">From <span class="placeholder">[add price]</span></span>
+          <p class="price">From <span class="placeholder">[add price]</span></p>
         </li>
         <li class="step">
-          <span class="len">Monthly</span>
+          <div class="step-top"><span class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14140f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></span><span class="pill len">Monthly</span></div>
           <h3>Partnership</h3>
           <p class="what">We deliver it alongside you.</p>
           <ul><li>Regular working sessions</li><li>Coaching for your leads</li></ul>
-          <span class="pill price">From <span class="placeholder">[add price]</span> / month</span>
+          <p class="price">From <span class="placeholder">[add price]</span> / month</p>
         </li>
       </ol>
     </div>
