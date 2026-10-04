@@ -3,7 +3,6 @@
 Landing page for Treehouse, a design & AI studio in Toronto.
 
 - `index.html`: the landing page. One static file, no build step. Open it in a browser or deploy it to any static host (Netlify, Vercel, GitHub Pages).
-- `research/report.html`: best practices, Toronto competitor scan, and notes on keeping founder names off the site. Internal; blocked in `robots.txt`.
 - `robots.txt`, `sitemap.xml`: for search engines.
 
 ## Before launch: replace these
