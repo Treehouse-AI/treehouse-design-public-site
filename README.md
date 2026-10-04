@@ -9,9 +9,9 @@ Landing page for Treehouse, a design & AI studio in Toronto.
 
 | What | Where |
 | --- | --- |
-| `example.com` (domain) | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` |
-| `hello@example.com` | `index.html` (contact section, JSON-LD) |
 | `https://cal.com/REPLACE-WITH-BOOKING-LINK` | `index.html` contact button |
+
+The domain (`treehouse-design.com`) and email (`hello@treehouse-design.com`) are already filled in. `CNAME` tells GitHub Pages which domain to serve.
 
 ## Drafted details to confirm
 
